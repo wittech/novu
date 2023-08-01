@@ -31,6 +31,17 @@ export interface ISmsOptions {
   from?: string;
   attachments?: IAttachmentOptions[];
   id?: string;
+  config?: {
+    signName?: string;
+    smsUpExtendCode?: string;
+    templateCode?: string;
+    templateParam?: string;
+    calledShowNumber?: string;
+    voiceCode?: string;
+    playTimes?: number;
+    volume?: number;
+    speed?: number;
+  };
 }
 export interface IPushOptions {
   target: string[];

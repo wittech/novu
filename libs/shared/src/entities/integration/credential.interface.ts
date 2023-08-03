@@ -25,4 +25,6 @@ export interface ICredentials {
   redirectUrl?: string;
   hmac?: boolean;
   ipPoolName?: string;
+  httpProxy?: string;
+  httpsProxy?: string;
 }

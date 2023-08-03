@@ -1,5 +1,5 @@
 import { IConfigCredentials, IProviderConfig } from '../provider.interface';
-import { slackConfig } from '../credentials';
+import { openimConfig, slackConfig, wechatConfig } from '../credentials';
 import { ChatProviderIdEnum } from '../provider.enum';
 
 import { ChannelTypeEnum } from '../../../types';
@@ -35,6 +35,22 @@ export const chatProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.CHAT,
     credentials: [] as IConfigCredentials[],
     docReference: 'https://developers.mattermost.com/integrate/webhooks/incoming/',
+    logoFileName: { light: 'mattermost.svg', dark: 'mattermost.svg' },
+  },
+  {
+    id: ChatProviderIdEnum.Wechat,
+    displayName: 'Wechat',
+    channel: ChannelTypeEnum.CHAT,
+    credentials: wechatConfig,
+    docReference: 'https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html',
+    logoFileName: { light: 'mattermost.svg', dark: 'mattermost.svg' },
+  },
+  {
+    id: ChatProviderIdEnum.Openim,
+    displayName: 'Openim',
+    channel: ChannelTypeEnum.CHAT,
+    credentials: openimConfig,
+    docReference: 'https://doc.rentsoft.cn/',
     logoFileName: { light: 'mattermost.svg', dark: 'mattermost.svg' },
   },
 ];

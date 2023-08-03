@@ -27,6 +27,8 @@ export enum CredentialsKeyEnum {
   RedirectUrl = 'redirectUrl',
   Hmac = 'hmac',
   IpPoolName = 'ipPoolName',
+  HttpProxy = 'httpProxy',
+  HttpsProxy = 'httpsProxy',
 }
 
 export enum EmailProviderIdEnum {
@@ -71,6 +73,8 @@ export enum SmsProviderIdEnum {
   AfricasTalking = 'africas-talking',
   Novu = 'novu-sms',
   Sendchamp = 'sendchamp',
+  AliyunSms = 'aliyun-sms',
+  AliyunVms = 'aliyun-vms',
 }
 
 export enum ChatProviderIdEnum {
@@ -78,6 +82,8 @@ export enum ChatProviderIdEnum {
   Discord = 'discord',
   MsTeams = 'msteams',
   Mattermost = 'mattermost',
+  Wechat = 'wechat',
+  Openim = 'openim',
 }
 
 export enum PushProviderIdEnum {
@@ -86,6 +92,7 @@ export enum PushProviderIdEnum {
   EXPO = 'expo',
   OneSignal = 'one-signal',
   PushWebhook = 'push-webhook',
+  JPush = 'jpush',
 }
 
 export enum InAppProviderIdEnum {

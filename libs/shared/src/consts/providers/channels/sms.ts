@@ -18,6 +18,8 @@ import {
   termiiConfig,
   africasTalkingConfig,
   sendchampConfig,
+  aliyunSmsConfig,
+  aliyunVmsConfig,
 } from '../credentials';
 import { SmsProviderIdEnum } from '../provider.enum';
 
@@ -177,6 +179,22 @@ export const smsProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.SMS,
     credentials: sendchampConfig,
     docReference: 'https://sendchamp.readme.io/reference/api-structure',
+    logoFileName: { light: 'sendchamp.svg', dark: 'sendchamp.svg' },
+  },
+  {
+    id: SmsProviderIdEnum.AliyunSms,
+    displayName: `AliyunSms`,
+    channel: ChannelTypeEnum.SMS,
+    credentials: aliyunSmsConfig,
+    docReference: 'https://next.api.aliyun.com/api/Dysmsapi/2017-05-25/SendSms',
+    logoFileName: { light: 'sendchamp.svg', dark: 'sendchamp.svg' },
+  },
+  {
+    id: SmsProviderIdEnum.AliyunVms,
+    displayName: `AliyunVms`,
+    channel: ChannelTypeEnum.SMS,
+    credentials: aliyunVmsConfig,
+    docReference: 'https://next.api.aliyun.com/api/Dyvmsapi/2017-05-25/SingleCallByVoice',
     logoFileName: { light: 'sendchamp.svg', dark: 'sendchamp.svg' },
   },
 ];

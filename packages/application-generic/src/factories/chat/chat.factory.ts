@@ -4,6 +4,8 @@ import { IntegrationEntity } from '@novu/dal';
 import { DiscordHandler } from './handlers/discord.handler';
 import { MSTeamsHandler } from './handlers/msteams.handler';
 import { MattermostHandler } from './handlers/mattermost.handler';
+import { WechatHandler } from './handlers/wechat.handler';
+import { OpenimHandler } from './handlers/openim.handler';
 
 export class ChatFactory implements IChatFactory {
   handlers: IChatHandler[] = [
@@ -11,6 +13,8 @@ export class ChatFactory implements IChatFactory {
     new DiscordHandler(),
     new MSTeamsHandler(),
     new MattermostHandler(),
+    new WechatHandler(),
+    new OpenimHandler(),
   ];
 
   getHandler(integration: IntegrationEntity) {

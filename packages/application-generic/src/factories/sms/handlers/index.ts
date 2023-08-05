@@ -1,3 +1,5 @@
+export * from './aliyun-sms.handler';
+export * from './aliyun-vms.handler';
 export * from './sns.handler';
 export * from './telnyx.handler';
 export * from './twilio.handler';
@@ -15,5 +17,4 @@ export * from './kannel.handler';
 export * from './sms-central.handler';
 export * from './africas-talking.handler';
 export * from './sendchamp.handler';
-export * from './aliyun-sms.handler';
-export * from './aliyun-vms.handler';
+export * from './novu.handler';

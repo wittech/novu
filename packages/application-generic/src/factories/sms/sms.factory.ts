@@ -1,6 +1,8 @@
 import { IntegrationEntity } from '@novu/dal';
 import { ISmsFactory, ISmsHandler } from './interfaces';
 import {
+  AliyunSmsHandler,
+  AliyunVmsHandler,
   SnsHandler,
   TelnyxHandler,
   TwilioHandler,
@@ -18,12 +20,13 @@ import {
   SmsCentralHandler,
   AfricasTalkingSmsHandler,
   SendchampSmsHandler,
-  AliyunSmsHandler,
-  AliyunVmsHandler,
+  NovuSmsHandler,
 } from './handlers';
 
 export class SmsFactory implements ISmsFactory {
   handlers: ISmsHandler[] = [
+    new AliyunSmsHandler(),
+    new AliyunVmsHandler(),
     new SnsHandler(),
     new TelnyxHandler(),
     new TwilioHandler(),
@@ -41,8 +44,7 @@ export class SmsFactory implements ISmsFactory {
     new SmsCentralHandler(),
     new AfricasTalkingSmsHandler(),
     new SendchampSmsHandler(),
-    new AliyunSmsHandler(),
-    new AliyunVmsHandler(),
+    new NovuSmsHandler(),
   ];
 
   getHandler(integration: IntegrationEntity) {

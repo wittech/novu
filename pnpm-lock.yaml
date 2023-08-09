@@ -11486,7 +11486,7 @@ packages:
         optional: true
     dependencies:
       '@types/react': 17.0.53
-      cypress: 12.17.2
+      cypress: 12.17.3
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
     dev: false
@@ -29308,7 +29308,7 @@ packages:
     peerDependencies:
       cypress: '>=2.1.0'
     dependencies:
-      cypress: 12.17.2
+      cypress: 12.17.3
     dev: true
 
   /cypress-network-idle@1.14.2:

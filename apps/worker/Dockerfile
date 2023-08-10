@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:experimental
 FROM nikolaik/python-nodejs:python3.10-nodejs16-alpine as dev_base
 RUN apk --update --no-cache add curl
 ENV NX_DAEMON=false

@@ -1,4 +1,4 @@
-# start build stage
+# syntax=docker/dockerfile:experimental
 FROM nikolaik/python-nodejs:python3.10-nodejs16-alpine as builder
 ENV NX_DAEMON=false
 

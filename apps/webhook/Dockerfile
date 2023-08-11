@@ -16,6 +16,7 @@ COPY ./meta .
 COPY ./deps .
 COPY ./pkg .
 
+ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-webhook,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
@@ -56,6 +57,7 @@ COPY ./meta .
 # Get the build artifacts that only include dist folders
 COPY --from=assets /usr/src/app .
 
+ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-webhook,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\

@@ -25,6 +25,7 @@ COPY nx.json .
 COPY pnpm-workspace.yaml .
 COPY pnpm-lock.yaml .
 
+ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-web,target=/root/.pnpm-store\
   pnpm install --reporter=silent
 

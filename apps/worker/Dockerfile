@@ -23,6 +23,7 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise E
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc  ; fi
 
+ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
@@ -61,6 +62,7 @@ COPY ./meta .
 # Get the build artifacts that only include dist folders
 COPY --from=assets /usr/src/app .
 
+ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "{${PACKAGE_PATH}}..." \
  --frozen-lockfile \

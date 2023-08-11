@@ -2,7 +2,7 @@ FROM nikolaik/python-nodejs:python3.10-nodejs16-alpine
 
 WORKDIR /usr/src/app
 
-RUN npm install -g pnpm@8.6.12 --loglevel notice --force
+RUN npm install -g pnpm@7.33.6 --loglevel notice --force
 
 COPY .npmrc .
 COPY package.json .

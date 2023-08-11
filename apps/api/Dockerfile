@@ -25,8 +25,7 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc  ; fi
 ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-api,target=/root/.pnpm-store\
  pnpm install --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
- --frozen-lockfile\
- --unsafe-perm
+ --frozen-lockfile
 
 RUN NODE_ENV=production NX_DAEMON=false pnpm build:api
 
@@ -64,8 +63,7 @@ COPY --from=assets /usr/src/app .
 ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-api,target=/root/.pnpm-store\
  pnpm install --filter "{${PACKAGE_PATH}}..." \
- --frozen-lockfile \
- --unsafe-perm
+ --frozen-lockfile
 
 ENV NEW_RELIC_NO_CONFIG_FILE=true
 

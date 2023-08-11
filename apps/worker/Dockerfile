@@ -27,7 +27,6 @@ ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
- --unsafe-perm\
  --reporter=silent
 
 RUN NODE_ENV=production NX_DAEMON=false pnpm build:worker
@@ -66,7 +65,6 @@ ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "{${PACKAGE_PATH}}..." \
  --frozen-lockfile \
- --unsafe-perm \
  --reporter=silent
 
 ENV NEW_RELIC_NO_CONFIG_FILE=true

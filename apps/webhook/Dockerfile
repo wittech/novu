@@ -20,7 +20,6 @@ ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-webhook,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
- --unsafe-perm\
  --reporter=silent
 
 RUN NODE_ENV=production pnpm build:webhook
@@ -61,7 +60,6 @@ ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-webhook,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
- --unsafe-perm\
  --reporter=silent
 
 RUN chown -R 1000:root .

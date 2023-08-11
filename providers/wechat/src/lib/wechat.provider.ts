@@ -75,6 +75,9 @@ export class WechatProvider implements IChatProvider {
   }
 
   async sendMessage(data: IChatOptions): Promise<ISendMessageSuccessResponse> {
+    console.log('channel:', data.channel);
+    console.log('webhookUrl:', data.webhookUrl);
+    console.log('content:', data.content);
     const accessToken = await this.getStableAccessToken();
     if (accessToken) {
       const response: any = await this.axiosInstance.post(

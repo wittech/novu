@@ -43,7 +43,7 @@ export const chatProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.CHAT,
     credentials: wechatConfig,
     docReference: 'https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html',
-    logoFileName: { light: 'mattermost.svg', dark: 'mattermost.svg' },
+    logoFileName: { light: 'wechat.svg', dark: 'wechat.svg' },
   },
   {
     id: ChatProviderIdEnum.Openim,
@@ -51,6 +51,6 @@ export const chatProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.CHAT,
     credentials: openimConfig,
     docReference: 'https://doc.rentsoft.cn/',
-    logoFileName: { light: 'mattermost.svg', dark: 'mattermost.svg' },
+    logoFileName: { light: 'openim.png', dark: 'openim.png' },
   },
 ];

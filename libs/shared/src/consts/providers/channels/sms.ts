@@ -187,7 +187,7 @@ export const smsProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.SMS,
     credentials: aliyunSmsConfig,
     docReference: 'https://next.api.aliyun.com/api/Dysmsapi/2017-05-25/SendSms',
-    logoFileName: { light: 'sendchamp.svg', dark: 'sendchamp.svg' },
+    logoFileName: { light: 'aliyun.png', dark: 'aliyun.png' },
   },
   {
     id: SmsProviderIdEnum.AliyunVms,
@@ -195,6 +195,6 @@ export const smsProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.SMS,
     credentials: aliyunVmsConfig,
     docReference: 'https://next.api.aliyun.com/api/Dyvmsapi/2017-05-25/SingleCallByVoice',
-    logoFileName: { light: 'sendchamp.svg', dark: 'sendchamp.svg' },
+    logoFileName: { light: 'aliyun.png', dark: 'aliyun.png' },
   },
 ];

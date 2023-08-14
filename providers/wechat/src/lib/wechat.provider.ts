@@ -7,6 +7,7 @@ import {
 import axios, { AxiosInstance } from 'axios';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import Redis from 'ioredis';
+import JSON5 from 'json5';
 
 export class WechatProvider implements IChatProvider {
   channelType = ChannelTypeEnum.CHAT as ChannelTypeEnum.CHAT;
@@ -81,7 +82,7 @@ export class WechatProvider implements IChatProvider {
     }
     const response: any = await this.axiosInstance.post(
       `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${accessToken}`,
-      data.content
+      JSON5.parse(data.content)
     );
 
     if (response.data.errcode === 0) {

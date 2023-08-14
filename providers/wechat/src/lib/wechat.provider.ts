@@ -76,29 +76,25 @@ export class WechatProvider implements IChatProvider {
 
   async sendMessage(data: IChatOptions): Promise<ISendMessageSuccessResponse> {
     const accessToken = await this.getStableAccessToken();
-    if (accessToken) {
-      const response: any = await this.axiosInstance.post(
-        `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${accessToken}`,
-        data.content
-      );
-
-      if (response.data.errcode === 0) {
-        //错误码为0表示成功
-        return {
-          id: response.data.msgid,
-          date: new Date().toISOString(),
-        };
-      } else {
-        //抛出错误
-        throw new Error(
-          `发送微信消息错误码：${response.data?.errcode}，原因：${response.data?.errmsg}。`
-        );
-      }
+    if (!accessToken) {
+      throw new Error('获取微信access_token错误');
     }
+    const response: any = await this.axiosInstance.post(
+      `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${accessToken}`,
+      data.content
+    );
 
-    return {
-      id: undefined,
-      date: new Date().toISOString(),
-    };
+    if (response.data.errcode === 0) {
+      //错误码为0表示成功
+      return {
+        id: response.data.msgid,
+        date: new Date().toISOString(),
+      };
+    } else {
+      //抛出错误
+      throw new Error(
+        `发送微信消息错误码：${response.data?.errcode}，原因：${response.data?.errmsg}。`
+      );
+    }
   }
 }

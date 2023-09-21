@@ -223,8 +223,11 @@ export class InMemoryProviderService {
   private inMemoryProviderSetup(): Redis | undefined {
     Logger.verbose('In-memory service set up', LOG_CONTEXT);
 
-    this.inMemoryProviderConfig = getRedisProviderConfig();
-    const { host, port, ttl } = getRedisProviderConfig();
+    const { getClient, getConfig, isClientReady } = getClientAndConfig();
+
+    this.isProviderClientReady = isClientReady;
+    this.inMemoryProviderConfig = getConfig();
+    const { host, port, ttl } = getConfig();
 
     if (!host) {
       Logger.log('Missing host for in-memory provider', LOG_CONTEXT);

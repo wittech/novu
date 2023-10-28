@@ -1,5 +1,5 @@
 import { IConfigCredentials, IProviderConfig } from '../provider.interface';
-import { openimConfig, slackConfig, wechatConfig } from '../credentials';
+import { slackConfig } from '../credentials';
 import { ChatProviderIdEnum } from '../provider.enum';
 
 import { ChannelTypeEnum } from '../../../types';
@@ -10,7 +10,7 @@ export const chatProviders: IProviderConfig[] = [
     displayName: 'Slack',
     channel: ChannelTypeEnum.CHAT,
     credentials: slackConfig,
-    docReference: 'https://docs.novu.co/channels/chat/slack',
+    docReference: 'https://docs.novu.co/channels-and-providers/chat/slack',
     logoFileName: { light: 'slack.svg', dark: 'slack.svg' },
   },
   {
@@ -18,7 +18,7 @@ export const chatProviders: IProviderConfig[] = [
     displayName: 'Discord',
     channel: ChannelTypeEnum.CHAT,
     credentials: [] as IConfigCredentials[],
-    docReference: 'https://docs.novu.co/channels/chat/discord',
+    docReference: 'https://docs.novu.co/channels-and-providers/chat/discord',
     logoFileName: { light: 'discord.svg', dark: 'discord.svg' },
   },
   {
@@ -26,7 +26,7 @@ export const chatProviders: IProviderConfig[] = [
     displayName: 'MSTeams',
     channel: ChannelTypeEnum.CHAT,
     credentials: [] as IConfigCredentials[],
-    docReference: 'https://docs.novu.co/channels/chat/msteams',
+    docReference: 'https://docs.novu.co/channels-and-providers/chat/ms-teams',
     logoFileName: { light: 'msteams.svg', dark: 'msteams.svg' },
   },
   {
@@ -38,19 +38,11 @@ export const chatProviders: IProviderConfig[] = [
     logoFileName: { light: 'mattermost.svg', dark: 'mattermost.svg' },
   },
   {
-    id: ChatProviderIdEnum.Wechat,
-    displayName: 'Wechat',
+    id: ChatProviderIdEnum.Ryver,
+    displayName: 'Ryver',
     channel: ChannelTypeEnum.CHAT,
-    credentials: wechatConfig,
-    docReference: 'https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html',
-    logoFileName: { light: 'wechat.svg', dark: 'wechat.svg' },
-  },
-  {
-    id: ChatProviderIdEnum.Openim,
-    displayName: 'Openim',
-    channel: ChannelTypeEnum.CHAT,
-    credentials: openimConfig,
-    docReference: 'https://doc.rentsoft.cn/',
-    logoFileName: { light: 'openim.png', dark: 'openim.png' },
+    credentials: [] as IConfigCredentials[],
+    docReference: 'https://api.ryver.com/ryvrest_api_examples.html#create-chat-message',
+    logoFileName: { light: 'ryver.png', dark: 'ryver.png' },
   },
 ];

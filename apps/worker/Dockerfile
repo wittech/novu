@@ -6,7 +6,7 @@ ARG BULL_MQ_PRO_TOKEN
 ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
 
 RUN npm i pm2 -g
-RUN npm --no-update-notifier --no-fund --global install pnpm@7.33.6
+RUN npm --no-update-notifier --no-fund --global install pnpm@8.9.0
 RUN pnpm --version
 
 WORKDIR /usr/src/app
@@ -23,10 +23,10 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise E
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc  ; fi
 
-ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
+ --unsafe-perm\
  --reporter=silent
 
 RUN NODE_ENV=production NX_DAEMON=false pnpm build:worker
@@ -61,10 +61,10 @@ COPY ./meta .
 # Get the build artifacts that only include dist folders
 COPY --from=assets /usr/src/app .
 
-ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "{${PACKAGE_PATH}}..." \
  --frozen-lockfile \
+ --unsafe-perm \
  --reporter=silent
 
 ENV NEW_RELIC_NO_CONFIG_FILE=true

@@ -27,6 +27,12 @@ export enum CredentialsKeyEnum {
   RedirectUrl = 'redirectUrl',
   Hmac = 'hmac',
   IpPoolName = 'ipPoolName',
+  ApiKeyRequestHeader = 'apiKeyRequestHeader',
+  SecretKeyRequestHeader = 'secretKeyRequestHeader',
+  IdPath = 'idPath',
+  DatePath = 'datePath',
+  AuthenticateByToken = 'authenticateByToken',
+  AuthenticationTokenKey = 'authenticationTokenKey',
   HttpProxy = 'httpProxy',
   HttpsProxy = 'httpsProxy',
 }
@@ -46,6 +52,7 @@ export enum EmailProviderIdEnum {
   Resend = 'resend',
   Plunk = 'plunk',
   MailerSend = 'mailersend',
+  Mailtrap = 'mailtrap',
   Clickatell = 'clickatell',
   Outlook365 = 'outlook365',
   Novu = 'novu-email',
@@ -73,6 +80,9 @@ export enum SmsProviderIdEnum {
   AfricasTalking = 'africas-talking',
   Novu = 'novu-sms',
   Sendchamp = 'sendchamp',
+  GenericSms = 'generic-sms',
+  Clicksend = 'clicksend',
+  Bandwidth = 'bandwidth',
   AliyunSms = 'aliyun-sms',
   AliyunVms = 'aliyun-vms',
 }
@@ -82,6 +92,7 @@ export enum ChatProviderIdEnum {
   Discord = 'discord',
   MsTeams = 'msteams',
   Mattermost = 'mattermost',
+  Ryver = 'ryver',
   Wechat = 'wechat',
   Openim = 'openim',
 }
@@ -91,6 +102,7 @@ export enum PushProviderIdEnum {
   APNS = 'apns',
   EXPO = 'expo',
   OneSignal = 'one-signal',
+  Pushpad = 'pushpad',
   PushWebhook = 'push-webhook',
   JPush = 'jpush',
 }

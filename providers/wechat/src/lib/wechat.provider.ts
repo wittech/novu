@@ -42,7 +42,7 @@ export class WechatProvider implements IChatProvider {
   }
 
   async getStableAccessToken(): Promise<string> {
-    const redisKey = `wechat_access_token:${this.appId}`;
+    const redisKey = `wechat_access_token:novu:${this.appId}`;
     const token = await this.redisInstance.get(redisKey);
     if (token) {
       return token;

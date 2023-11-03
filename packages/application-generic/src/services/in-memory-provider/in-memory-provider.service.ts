@@ -24,14 +24,7 @@ import {
   IRedisClusterProviderConfig,
 } from './redis-cluster-provider';
 
-const LOG_CONTEXT = 'InMemoryCluster';
-
-export type InMemoryProviderClient = Redis | Cluster | undefined;
-type InMemoryProviderConfig =
-  | IElasticacheClusterProviderConfig
-  | IRedisProviderConfig
-  | IRedisClusterProviderConfig;
-export type Pipeline = ChainableCommander;
+const LOG_CONTEXT = 'InMemoryProviderService';
 
 @Injectable()
 export class InMemoryProviderService {
@@ -40,15 +33,44 @@ export class InMemoryProviderService {
 
   constructor(private enableAutoPipelining?: boolean) { }
 
-  public initialize(): void {
-    Logger.log('In-memory provider service initialized', LOG_CONTEXT);
-
-    this.inMemoryProviderClient = this.buildClient();
+  constructor(
+    private provider: InMemoryProviderEnum,
+    private isCluster: boolean,
+    private enableAutoPipelining?: boolean
+  ) {
+    Logger.log(
+      this.descriptiveLogMessage('In-memory provider service initialized'),
+      LOG_CONTEXT
+    );
+    this.inMemoryProviderClient = this.buildClient(provider);
   }
 
-  private buildClient(): Redis | Cluster | undefined {
-    return this.isClusterMode()
-      ? this.inMemoryClusterProviderSetup()
+  public get getProvider(): {
+    selected: InMemoryProviderEnum;
+    configured: InMemoryProviderEnum;
+  } {
+    const config = this.isCluster
+      ? getClientAndConfigForCluster(this.provider)
+      : getClientAndConfig();
+
+    return {
+      selected: this.provider,
+      configured: config.provider,
+    };
+  }
+
+  protected descriptiveLogMessage(message) {
+    return `[Provider: ${this.provider}] ${message}`;
+  }
+
+  private buildClient(provider: InMemoryProviderEnum): InMemoryProviderClient {
+    // TODO: Temporary while migrating to MemoryDB
+    if (provider === InMemoryProviderEnum.OLD_INSTANCE_REDIS) {
+      return this.oldInstanceInMemoryProviderSetup();
+    }
+
+    return this.isCluster
+      ? this.inMemoryClusterProviderSetup(provider)
       : this.inMemoryProviderSetup();
   }
 
@@ -83,27 +105,22 @@ export class InMemoryProviderService {
     return this.getStatus() === CLIENT_READY;
   }
 
-  public isClusterMode(): boolean {
-    const isClusterModeEnabled =
-      process.env.IN_MEMORY_CLUSTER_MODE_ENABLED === 'true';
-    Logger.log(
-      `Cluster mode ${isClusterModeEnabled ? 'is' : 'is not'
-      } enabled for InMemoryProviderService`
-    );
-
-    return isClusterModeEnabled;
-  }
-
-  public async getClusterOptions(): Promise<ClusterOptions | undefined> {
-    const isClusterMode = await this.isClusterMode();
-    if (this.inMemoryProviderClient && isClusterMode) {
+  public getClusterOptions(): ClusterOptions | undefined {
+    if (this.inMemoryProviderClient && this.isCluster) {
       return this.inMemoryProviderClient.options;
     }
   }
 
   public getOptions(): RedisOptions | undefined {
     if (this.inMemoryProviderClient) {
-      if (this.isClusterMode()) {
+      if (
+        this.provider === InMemoryProviderEnum.OLD_INSTANCE_REDIS ||
+        !this.isCluster
+      ) {
+        const options: RedisOptions = this.inMemoryProviderClient.options;
+
+        return options;
+      } else {
         const clusterOptions: ClusterOptions =
           this.inMemoryProviderClient.options;
 
@@ -274,7 +291,7 @@ export class InMemoryProviderService {
   }
 
   public inMemoryScan(pattern: string): ScanStream {
-    if (this.isClusterMode()) {
+    if (this.isCluster) {
       const client = this.inMemoryProviderClient as Cluster;
 
       return client.sscanStream(pattern);

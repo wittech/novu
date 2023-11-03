@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 export enum CredentialsKeyEnum {
+  HttpProxy = 'httpProxy',
+  HttpsProxy = 'httpsProxy',
   ApiKey = 'apiKey',
   User = 'user',
   SecretKey = 'secretKey',
@@ -33,8 +35,11 @@ export enum CredentialsKeyEnum {
   DatePath = 'datePath',
   AuthenticateByToken = 'authenticateByToken',
   AuthenticationTokenKey = 'authenticationTokenKey',
-  HttpProxy = 'httpProxy',
-  HttpsProxy = 'httpsProxy',
+  AccessKey = 'accessKey',
+  InstanceId = 'instanceId',
+  ApiToken = 'apiToken',
+  ApiURL = 'apiURL',
+  AppID = 'appID',
 }
 
 export enum EmailProviderIdEnum {
@@ -58,9 +63,12 @@ export enum EmailProviderIdEnum {
   Novu = 'novu-email',
   SparkPost = 'sparkpost',
   EmailWebhook = 'email-webhook',
+  Braze = 'braze',
 }
 
 export enum SmsProviderIdEnum {
+  AliyunSms = 'aliyun-sms',
+  AliyunVms = 'aliyun-vms',
   Nexmo = 'nexmo',
   Plivo = 'plivo',
   Sms77 = 'sms77',
@@ -72,6 +80,7 @@ export enum SmsProviderIdEnum {
   Firetext = 'firetext',
   Infobip = 'infobip-sms',
   BurstSms = 'burst-sms',
+  BulkSms = 'bulk-sms',
   Clickatell = 'clickatell',
   FortySixElks = 'forty-six-elks',
   Kannel = 'kannel',
@@ -83,28 +92,31 @@ export enum SmsProviderIdEnum {
   GenericSms = 'generic-sms',
   Clicksend = 'clicksend',
   Bandwidth = 'bandwidth',
-  AliyunSms = 'aliyun-sms',
-  AliyunVms = 'aliyun-vms',
+  MessageBird = 'messagebird',
+  Simpletexting = 'simpletexting',
+  AzureSms = 'azure-sms',
 }
 
 export enum ChatProviderIdEnum {
+  Wechat = 'wechat',
+  Openim = 'openim',
   Slack = 'slack',
   Discord = 'discord',
   MsTeams = 'msteams',
   Mattermost = 'mattermost',
   Ryver = 'ryver',
-  Wechat = 'wechat',
-  Openim = 'openim',
+  Zulip = 'zulip',
 }
 
 export enum PushProviderIdEnum {
+  JPush = 'jpush',
   FCM = 'fcm',
   APNS = 'apns',
   EXPO = 'expo',
   OneSignal = 'one-signal',
   Pushpad = 'pushpad',
   PushWebhook = 'push-webhook',
-  JPush = 'jpush',
+  PusherBeams = 'pusher-beams',
 }
 
 export enum InAppProviderIdEnum {

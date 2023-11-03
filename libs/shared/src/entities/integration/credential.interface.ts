@@ -1,4 +1,6 @@
 export interface ICredentials {
+  httpProxy?: string;
+  httpsProxy?: string;
   apiKey?: string;
   user?: string;
   secretKey?: string;
@@ -31,6 +33,9 @@ export interface ICredentials {
   datePath?: string;
   authenticateByToken?: boolean;
   authenticationTokenKey?: string;
-  httpProxy?: string;
-  httpsProxy?: string;
+  accessKey?: string;
+  instanceId?: string;
+  apiToken?: string;
+  apiURL?: string;
+  appID?: string;
 }

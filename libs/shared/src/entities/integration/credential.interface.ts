@@ -38,4 +38,9 @@ export interface ICredentials {
   apiToken?: string;
   apiURL?: string;
   appID?: string;
+  alertUid?: string;
+  title?: string;
+  imageUrl?: string;
+  state?: string;
+  externalLink?: string;
 }

@@ -40,6 +40,11 @@ export enum CredentialsKeyEnum {
   ApiToken = 'apiToken',
   ApiURL = 'apiURL',
   AppID = 'appID',
+  alertUid = 'alertUid',
+  title = 'title',
+  imageUrl = 'imageUrl',
+  state = 'state',
+  externalLink = 'externalLink',
 }
 
 export enum EmailProviderIdEnum {
@@ -106,6 +111,7 @@ export enum ChatProviderIdEnum {
   Mattermost = 'mattermost',
   Ryver = 'ryver',
   Zulip = 'zulip',
+  GrafanaOnCall = 'grafana-on-call',
 }
 
 export enum PushProviderIdEnum {

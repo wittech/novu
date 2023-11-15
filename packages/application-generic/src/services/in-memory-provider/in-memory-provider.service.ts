@@ -64,11 +64,6 @@ export class InMemoryProviderService {
   }
 
   private buildClient(provider: InMemoryProviderEnum): InMemoryProviderClient {
-    // TODO: Temporary while migrating to MemoryDB
-    if (provider === InMemoryProviderEnum.OLD_INSTANCE_REDIS) {
-      return this.oldInstanceInMemoryProviderSetup();
-    }
-
     return this.isCluster
       ? this.inMemoryClusterProviderSetup(provider)
       : this.inMemoryProviderSetup();
@@ -113,10 +108,7 @@ export class InMemoryProviderService {
 
   public getOptions(): RedisOptions | undefined {
     if (this.inMemoryProviderClient) {
-      if (
-        this.provider === InMemoryProviderEnum.OLD_INSTANCE_REDIS ||
-        !this.isCluster
-      ) {
+      if (!this.isCluster) {
         const options: RedisOptions = this.inMemoryProviderClient.options;
 
         return options;
@@ -283,7 +275,7 @@ export class InMemoryProviderService {
       });
 
       inMemoryProviderClient.on('wait', () => {
-        Logger.log('Redis wait', LOG_CONTEXT);
+        Logger.verbose(this.descriptiveLogMessage('Redis wait'), LOG_CONTEXT);
       });
 
       return inMemoryProviderClient;

@@ -2,7 +2,7 @@ import { ICredentials } from '@novu/shared';
 import { ChannelTypeEnum } from '@novu/stateless';
 import { BaseChatHandler } from './base.handler';
 import { WechatProvider } from '@novu/wechat';
-import { getRedisInstance } from '../../../services/in-memory-provider/redis-provider';
+import { getRedisInstance } from '../../../services/in-memory-provider/providers/redis-provider';
 
 export class WechatHandler extends BaseChatHandler {
   constructor() {

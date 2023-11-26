@@ -1,5 +1,8 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs18-slim as dev_base
-RUN apk --update --no-cache add curl
+# RUN apk --update --no-cache add curl
+RUN apt-get update
+# install curl 
+RUN apt-get install curl
 ENV NX_DAEMON=false
 
 ARG BULL_MQ_PRO_TOKEN

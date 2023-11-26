@@ -1,11 +1,11 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs16-alpine as dev_base
+FROM nikolaik/python-nodejs:python3.10-nodejs18-slim as dev_base
 
 ARG BULL_MQ_PRO_TOKEN
 ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
 ENV NX_DAEMON=false
 
 RUN npm i pm2 -g
-RUN npm --no-update-notifier --no-fund --global install pnpm@7.33.6
+RUN npm --no-update-notifier --no-fund --global install pnpm@8.9.0
 RUN pnpm --version
 
 
@@ -23,10 +23,10 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise E
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc; fi
 
-ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
+ --unsafe-perm\
  --reporter=silent
 
 RUN NODE_ENV=production pnpm build:inbound-mail
@@ -64,10 +64,10 @@ COPY ./meta .
 # Get the build artifacts that only include dist folders
 COPY --from=assets /usr/src/app .
 
-ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
+ --unsafe-perm\
  --reporter=silent
 
 RUN chown -R 1000:root .

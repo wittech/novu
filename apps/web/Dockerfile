@@ -1,10 +1,11 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs16-alpine as builder
+# start build stage
+FROM nikolaik/python-nodejs:python3.10-nodejs18-slim as builder
 ENV NX_DAEMON=false
 
 WORKDIR /usr/src/app
 
 RUN apk add --no-cache bash
-RUN npm install -g pnpm@7.33.6 --loglevel notice
+RUN npm install -g pnpm@8.9.0 --loglevel notice
 
 COPY .npmrc .
 COPY package.json .
@@ -14,6 +15,7 @@ COPY libs/dal ./libs/dal
 COPY libs/testing ./libs/testing
 COPY packages/client ./packages/client
 COPY libs/shared ./libs/shared
+COPY libs/design-system ./libs/design-system
 COPY packages/notification-center ./packages/notification-center
 COPY packages/stateless ./packages/stateless
 COPY packages/node ./packages/node
@@ -25,9 +27,8 @@ COPY nx.json .
 COPY pnpm-workspace.yaml .
 COPY pnpm-lock.yaml .
 
-ENV NODE_OPTIONS --max-old-space-size=4096
 RUN --mount=type=cache,id=pnpm-store-web,target=/root/.pnpm-store\
-  pnpm install --reporter=silent
+  pnpm install --frozen-lockfile
 
 RUN pnpm add @babel/core -w
 
@@ -42,7 +43,7 @@ FROM node:16-alpine
 WORKDIR /app
 
 RUN apk add --no-cache bash
-RUN npm install -g pnpm@7.33.6 http-server --loglevel notice
+RUN npm install -g pnpm@8.9.0 http-server --loglevel notice
 
 COPY --from=builder /usr/src/app/apps/web/env.sh /app/env.sh
 COPY --from=builder /usr/src/app/apps/web/.env /app/.env

@@ -41,7 +41,9 @@ RUN NX_DAEMON=false pnpm build:web
 FROM node:16-alpine
 
 WORKDIR /app
-
+# 设置环境变量
+ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 RUN apk add --no-cache bash
 RUN npm install -g pnpm@8.9.0 http-server --loglevel notice
 

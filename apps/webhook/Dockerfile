@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs18-slim as dev_base
+FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as dev_base
 ENV NX_DAEMON=false
 
 RUN npm i pm2 -g

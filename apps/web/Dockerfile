@@ -1,5 +1,5 @@
 # start build stage
-FROM nikolaik/python-nodejs:python3.10-nodejs18-slim as builder
+FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as builder
 ENV NX_DAEMON=false
 
 WORKDIR /usr/src/app

@@ -1,8 +1,11 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs18-slim as dev_base
+FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as dev_base
 # RUN apk --update --no-cache add curl
+# 设置环境变量
+ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 RUN apt-get update
 # install curl 
-RUN apt-get install curl
+RUN apt-get -y install curl
 ENV NX_DAEMON=false
 
 ARG BULL_MQ_PRO_TOKEN

@@ -136,6 +136,7 @@ async function getFilesFromPnpmSelector(selector, cwd, options = {}) {
  * @returns {Promise<string[]>}
  */
 async function getMetafilesFromPnpmSelector(selector, cwd, options = {}) {
+  /** 由于默认，gitignore为true，会导致pnpm-lock.yaml被忽略，引发后续docker镜像编译找不到lock文件*/
   const [rootMetas, projectMetas] = await Promise.all([
     globby(
       [
@@ -150,7 +151,7 @@ async function getMetafilesFromPnpmSelector(selector, cwd, options = {}) {
         'lerna.json',
         '.npmrc-cloud',
       ],
-      { cwd, dot: true, gitignore: true }
+      { cwd, dot: true, gitignore: false }
     ),
     getPackagePathsFromPnpmSelector(selector, cwd).then((paths) => {
       const patterns = paths.map((p) => `${p}/**/package.json`).concat(options.extraPatterns || []);

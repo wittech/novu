@@ -27,6 +27,7 @@ import {
   MessageBirdHandler,
   AzureSmsHandler,
   NovuSmsHandler,
+  NexmoHandler,
 } from './handlers';
 
 export class SmsFactory implements ISmsFactory {
@@ -57,6 +58,7 @@ export class SmsFactory implements ISmsFactory {
     new MessageBirdHandler(),
     new AzureSmsHandler(),
     new NovuSmsHandler(),
+    new NexmoHandler(),
   ];
 
   getHandler(integration: IntegrationEntity) {

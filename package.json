@@ -1,14 +1,14 @@
 {
   "name": "novuhq",
   "private": true,
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@8.12.1",
   "scripts": {
     "bootstrap": "npm run setup:dev",
     "start": "npm run jarvis",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "publish": "lerna publish from-package",
-    "setup:project": "npx --yes pnpm@8.11.0 i && node scripts/setup-env-files.js && pnpm build",
+    "setup:project": "npx --yes pnpm@8.12.1 i && node scripts/setup-env-files.js && pnpm build",
     "clean": "lerna clean --yes && npm run prebuild",
     "commit": "cz",
     "nx": "nx",
@@ -132,7 +132,7 @@
     "meow": "^10.1.3",
     "mississippi": "^4.0.0",
     "ora": "~5.4.1",
-    "pnpm": "8.11.0",
+    "pnpm": "8.12.1",
     "prettier": "~2.8.0",
     "process": "^0.11.10",
     "rimraf": "^3.0.2",
@@ -189,7 +189,7 @@
   },
   "engines": {
     "node": ">=13.0.0 <21.0.0",
-    "pnpm": "^8.11.0"
+    "pnpm": "^8.12.1"
   },
   "dependencies": {
     "nx": "^16.10.0",

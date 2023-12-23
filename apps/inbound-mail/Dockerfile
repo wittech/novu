@@ -1,4 +1,12 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as dev_base
+FROM node:20-alpine as dev_base
+# 更新为国内源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# Build dependencies
+RUN apk --update --no-cache add make gcc g++ python3 curl
+
+# Avoid "gyp ERR! stack Error: certificate has expired"
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 ARG BULL_MQ_PRO_TOKEN
 ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
@@ -25,9 +33,8 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc; fi
 
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
- --frozen-lockfile\
- --unsafe-perm\
- --reporter=silent
+ --no-frozen-lockfile\
+ --unsafe-perm
 
 RUN NODE_ENV=production pnpm build:inbound-mail
 
@@ -66,9 +73,8 @@ COPY --from=assets /usr/src/app .
 
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "{${PACKAGE_PATH}}..."\
- --frozen-lockfile\
- --unsafe-perm\
- --reporter=silent
+ --no-frozen-lockfile\
+ --unsafe-perm
 
 RUN chown -R 1000:root .
 

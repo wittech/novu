@@ -1,16 +1,19 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as dev_base
-# RUN apk --update --no-cache add curl
-# 设置环境变量
-ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
-ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
-RUN apt-get update
-# install curl 
-RUN apt-get -y install curl
+FROM node:20-alpine as dev_base
+# 更新为国内源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# Build dependencies
+RUN apk --update --no-cache add make gcc g++ python3 curl
+
+# Avoid "gyp ERR! stack Error: certificate has expired"
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
 ENV NX_DAEMON=false
 
 ARG BULL_MQ_PRO_TOKEN
 ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
 
+RUN npm config set registry https://registry.npmmirror.com --global
 RUN npm i pm2 -g
 RUN npm --no-update-notifier --no-fund --global install pnpm@8.12.1
 RUN pnpm --version
@@ -31,9 +34,8 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc  ; fi
 
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
- --frozen-lockfile\
- --unsafe-perm\
- --reporter=silent
+ --no-frozen-lockfile\
+ --unsafe-perm
 
 RUN NODE_ENV=production NX_DAEMON=false pnpm build:worker
 
@@ -69,9 +71,8 @@ COPY --from=assets /usr/src/app .
 
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  pnpm install --filter "{${PACKAGE_PATH}}..." \
- --frozen-lockfile \
- --unsafe-perm \
- --reporter=silent
+ --no-frozen-lockfile \
+ --unsafe-perm
 
 ENV NEW_RELIC_NO_CONFIG_FILE=true
 

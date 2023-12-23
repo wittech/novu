@@ -1,11 +1,13 @@
 import { IntegrationEntity } from '@novu/dal';
 import {
-  APNSHandler,
+  // APNSHandler,
   ExpoHandler,
   FCMHandler,
-  OneSignalHandler,
-  PusherBeamsHandler,
-  PushpadHandler,
+  /*
+   * OneSignalHandler,
+   * PusherBeamsHandler,
+   * PushpadHandler,
+   */
   PushWebhookHandler,
 } from './handlers';
 import { IPushFactory, IPushHandler } from './interfaces';
@@ -14,11 +16,13 @@ export class PushFactory implements IPushFactory {
   handlers: IPushHandler[] = [
     new FCMHandler(),
     new ExpoHandler(),
-    new APNSHandler(),
-    new OneSignalHandler(),
-    new PushpadHandler(),
+    // new APNSHandler(),
+    /*
+     * new OneSignalHandler(),
+     * new PushpadHandler(),
+     */
     new PushWebhookHandler(),
-    new PusherBeamsHandler(),
+    // new PusherBeamsHandler(),
   ];
 
   getHandler(integration: IntegrationEntity): IPushHandler {

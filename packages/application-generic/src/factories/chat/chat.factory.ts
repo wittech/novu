@@ -1,24 +1,30 @@
 import { IChatFactory, IChatHandler } from './interfaces';
-import { SlackHandler } from './handlers/slack.handler';
+// import { SlackHandler } from './handlers/slack.handler';
 import { IntegrationEntity } from '@novu/dal';
-import { DiscordHandler } from './handlers/discord.handler';
-import { MSTeamsHandler } from './handlers/msteams.handler';
-import { MattermostHandler } from './handlers/mattermost.handler';
+/*
+ * import { DiscordHandler } from './handlers/discord.handler';
+ * import { MSTeamsHandler } from './handlers/msteams.handler';
+ * import { MattermostHandler } from './handlers/mattermost.handler';
+ */
 import { GrafanaOnCallHandler } from './handlers/grafana-on-call.handler';
-import { RyverHandler } from './handlers/ryver.handler';
-import { ZulipHandler } from './handlers/zulip.handler';
-import { GetstreamChatHandler } from './handlers/getstream.handler';
+/*
+ * import { RyverHandler } from './handlers/ryver.handler';
+ * import { ZulipHandler } from './handlers/zulip.handler';
+ * import { GetstreamChatHandler } from './handlers/getstream.handler';
+ */
 
 export class ChatFactory implements IChatFactory {
   handlers: IChatHandler[] = [
-    new SlackHandler(),
-    new DiscordHandler(),
-    new MSTeamsHandler(),
-    new MattermostHandler(),
-    new RyverHandler(),
-    new ZulipHandler(),
+    /*
+     * new SlackHandler(),
+     * new DiscordHandler(),
+     * new MSTeamsHandler(),
+     * new MattermostHandler(),
+     * new RyverHandler(),
+     * new ZulipHandler(),
+     */
     new GrafanaOnCallHandler(),
-    new GetstreamChatHandler(),
+    // new GetstreamChatHandler(),
   ];
 
   getHandler(integration: IntegrationEntity) {

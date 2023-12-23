@@ -1,50 +1,60 @@
 import { IntegrationEntity } from '@novu/dal';
 import {
   SendgridHandler,
-  MailgunHandler,
-  EmailJsHandler,
-  MailjetHandler,
-  MailtrapHandler,
-  MandrillHandler,
-  NodemailerHandler,
-  PostmarkHandler,
-  SendinblueHandler,
-  SESHandler,
-  NetCoreHandler,
-  InfobipEmailHandler,
-  MailerSendHandler,
+  /*
+   * MailgunHandler,
+   * EmailJsHandler,
+   * MailjetHandler,
+   * MailtrapHandler,
+   * MandrillHandler,
+   * NodemailerHandler,
+   * PostmarkHandler,
+   * SendinblueHandler,
+   * SESHandler,
+   * NetCoreHandler,
+   * InfobipEmailHandler,
+   * MailerSendHandler,
+   */
   Outlook365Handler,
-  ResendHandler,
-  SparkPostHandler,
+  /*
+   * ResendHandler,
+   * SparkPostHandler,
+   */
   EmailWebhookHandler,
   NovuEmailHandler,
-  PlunkHandler,
-  BrazeEmailHandler,
+  /*
+   * PlunkHandler,
+   * BrazeEmailHandler,
+   */
 } from './handlers';
 import { IMailHandler } from './interfaces/send.handler.interface';
 
 export class MailFactory {
   handlers: IMailHandler[] = [
     new SendgridHandler(),
-    new MailgunHandler(),
-    new NetCoreHandler(),
-    new EmailJsHandler(),
-    new MailjetHandler(),
-    new MailtrapHandler(),
-    new MandrillHandler(),
-    new NodemailerHandler(),
-    new PostmarkHandler(),
-    new SendinblueHandler(),
-    new SESHandler(),
-    new InfobipEmailHandler(),
-    new MailerSendHandler(),
+    /*
+     * new MailgunHandler(),
+     * new NetCoreHandler(),
+     * new EmailJsHandler(),
+     * new MailjetHandler(),
+     * new MailtrapHandler(),
+     * new MandrillHandler(),
+     * new NodemailerHandler(),
+     * new PostmarkHandler(),
+     * new SendinblueHandler(),
+     * new SESHandler(),
+     * new InfobipEmailHandler(),
+     * new MailerSendHandler(),
+     */
     new Outlook365Handler(),
-    new ResendHandler(),
-    new PlunkHandler(),
-    new SparkPostHandler(),
+    /*
+     * new ResendHandler(),
+     * new PlunkHandler(),
+     * new SparkPostHandler(),
+     */
     new EmailWebhookHandler(),
     new NovuEmailHandler(),
-    new BrazeEmailHandler(),
+    // new BrazeEmailHandler(),
   ];
 
   getHandler(

@@ -1,8 +1,12 @@
 # start build stage
-FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as builder
+FROM node:20-alpine as builder
+# 更新为国内源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+# Build dependencies
+RUN apk --update --no-cache add make gcc g++ python3 curl
 ENV NX_DAEMON=false
 
 WORKDIR /usr/src/app
@@ -43,7 +47,7 @@ RUN NX_DAEMON=false pnpm build:web
 # end build stage
 
 # start production stage
-FROM node:16-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 # 设置环境变量

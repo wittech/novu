@@ -1,9 +1,12 @@
 # start build stage
 FROM nikolaik/python-nodejs:python3.10-nodejs16-slim as builder
+# 设置环境变量
+ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 ENV NX_DAEMON=false
 
 WORKDIR /usr/src/app
-
+RUN npm config set registry https://registry.npmmirror.com --global
 # RUN apk add --no-cache bash
 RUN npm install -g pnpm@8.12.1 --loglevel notice
 
@@ -30,7 +33,7 @@ COPY pnpm-workspace.yaml .
 COPY pnpm-lock.yaml .
 
 RUN --mount=type=cache,id=pnpm-store-web,target=/root/.pnpm-store\
-  pnpm install --frozen-lockfile
+  pnpm install --no-frozen-lockfile
 
 RUN pnpm add @babel/core -w
 
@@ -46,6 +49,7 @@ WORKDIR /app
 # 设置环境变量
 ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+RUN npm config set registry https://registry.npmmirror.com --global
 RUN apk add --no-cache bash
 RUN npm install -g pnpm@8.12.1 http-server --loglevel notice
 

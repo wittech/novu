@@ -1,8 +1,10 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs16-slim
 ENV NX_DAEMON=false
-
+# 设置环境变量
+ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 WORKDIR /usr/src/app
-
+RUN npm config set registry https://registry.npmmirror.com --global
 # RUN apk add --no-cache bash
 RUN npm install -g pnpm@8.12.1 --loglevel notice
 

@@ -36,6 +36,8 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise E
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc; fi
 
+# https://www.npmjs.com/package/@newrelic/native-metrics
+# RUN export NR_NATIVE_METRICS_NO_BUILD=true
 RUN pnpm install
 RUN pnpm build:ws
 

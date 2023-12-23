@@ -36,7 +36,7 @@ RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise E
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
 RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc; fi
 
-RUN pnpm install --reporter=silent
+RUN pnpm install
 RUN pnpm build:ws
 
 RUN if $BULL_MQ_PRO_NPM_TOKEN ; then rm -f .npmrc ; fi

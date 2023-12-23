@@ -50,11 +50,13 @@ RUN NX_DAEMON=false pnpm build:web
 FROM node:20-alpine
 
 WORKDIR /app
+# 更新为国内源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 RUN npm config set registry https://registry.npmmirror.com --global
-RUN apk add --no-cache bash
+RUN apk --update --no-cache add bash
 RUN npm install -g pnpm@8.12.1 http-server --loglevel notice
 
 COPY --from=builder /usr/src/app/apps/web/env.sh /app/env.sh

@@ -9,14 +9,13 @@ RUN apk --update --no-cache add make gcc g++ python3 curl
 ENV NX_DAEMON=false
 WORKDIR /usr/src/app
 RUN npm config set registry https://registry.npmmirror.com --global
-# RUN apk add --no-cache bash
 RUN npm install -g pnpm@8.12.1 --loglevel notice
+RUN apk add --no-cache bash
 
 COPY .npmrc .
 COPY package.json .
 
 COPY apps/widget ./apps/widget
-COPY apps/widget/env.sh /usr/src/app/env.sh
 
 COPY libs/dal ./libs/dal
 COPY packages/client ./packages/client

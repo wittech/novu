@@ -16,6 +16,7 @@ COPY .npmrc .
 COPY package.json .
 
 COPY apps/widget ./apps/widget
+COPY apps/widget/env.sh /usr/src/app/env.sh
 
 COPY libs/dal ./libs/dal
 COPY packages/client ./packages/client
@@ -34,7 +35,6 @@ COPY .prettierignore .
 COPY nx.json .
 COPY pnpm-workspace.yaml .
 COPY pnpm-lock.yaml .
-COPY env.sh .
 
 RUN pnpm install --reporter=silent
 RUN pnpm build

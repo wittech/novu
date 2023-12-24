@@ -34,6 +34,7 @@ COPY .prettierignore .
 COPY nx.json .
 COPY pnpm-workspace.yaml .
 COPY pnpm-lock.yaml .
+COPY env.sh .
 
 RUN pnpm install --reporter=silent
 RUN pnpm build

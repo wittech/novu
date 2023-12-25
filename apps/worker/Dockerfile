@@ -6,7 +6,8 @@ ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.3
 ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
 # Build dependencies
 RUN apk --update --no-cache add make gcc g++ python3 curl
-
+# https://github.com/newrelic/node-native-metrics/pull/112
+# RUN apk --update --no-cache add libexecinfo libexecinfo-de
 # Avoid "gyp ERR! stack Error: certificate has expired"
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
@@ -16,7 +17,7 @@ ARG BULL_MQ_PRO_TOKEN
 ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
 
 RUN npm config set registry https://registry.npmmirror.com --global
-RUN npm i pm2 -g
+RUN npm i pm2 nan -g
 RUN npm --no-update-notifier --no-fund --global install pnpm@8.12.1
 RUN pnpm --version
 

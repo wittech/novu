@@ -54,6 +54,7 @@
     "@novu/wechat": "*",
     "@novu/aliyun-sms": "*",
     "@novu/aliyun-vms": "*",
+    "@novu/hongyan-sms": "*",
     "@nestjs/passport": "^10.0.1",
     "@novu/azure-sms": "^0.22.0",
     "@novu/bulk-sms": "^0.22.0",

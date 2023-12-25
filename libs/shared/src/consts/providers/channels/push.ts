@@ -14,22 +14,24 @@ import { IProviderConfig } from '../provider.interface';
 import { ChannelTypeEnum } from '../../../types';
 
 export const pushProviders: IProviderConfig[] = [
-  {
-    id: PushProviderIdEnum.OneSignal,
-    displayName: 'OneSignal',
-    channel: ChannelTypeEnum.PUSH,
-    credentials: oneSignalConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/onesignal',
-    logoFileName: { light: 'one-signal.svg', dark: 'one-signal.svg' },
-  },
-  {
-    id: PushProviderIdEnum.Pushpad,
-    displayName: 'Pushpad',
-    channel: ChannelTypeEnum.PUSH,
-    credentials: pushpadConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/pushpad',
-    logoFileName: { light: 'pushpad.svg', dark: 'pushpad.svg' },
-  },
+  /*
+   * {
+   *   id: PushProviderIdEnum.OneSignal,
+   *   displayName: 'OneSignal',
+   *   channel: ChannelTypeEnum.PUSH,
+   *   credentials: oneSignalConfig,
+   *   docReference: 'https://docs.novu.co/channels-and-providers/push/onesignal',
+   *   logoFileName: { light: 'one-signal.svg', dark: 'one-signal.svg' },
+   * },
+   * {
+   *   id: PushProviderIdEnum.Pushpad,
+   *   displayName: 'Pushpad',
+   *   channel: ChannelTypeEnum.PUSH,
+   *   credentials: pushpadConfig,
+   *   docReference: 'https://docs.novu.co/channels-and-providers/push/pushpad',
+   *   logoFileName: { light: 'pushpad.svg', dark: 'pushpad.svg' },
+   * },
+   */
   {
     id: PushProviderIdEnum.FCM,
     displayName: 'Firebase Cloud Messaging',
@@ -64,12 +66,14 @@ export const pushProviders: IProviderConfig[] = [
     logoFileName: { light: 'push-webhook.svg', dark: 'push-webhook.svg' },
     betaVersion: true,
   },
-  {
-    id: PushProviderIdEnum.PusherBeams,
-    displayName: 'Pusher Beams',
-    channel: ChannelTypeEnum.PUSH,
-    credentials: pusherBeamsConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/pusher-beams',
-    logoFileName: { light: 'pusher-beams.svg', dark: 'pusher-beams.svg' },
-  },
+  /*
+   * {
+   *   id: PushProviderIdEnum.PusherBeams,
+   *   displayName: 'Pusher Beams',
+   *   channel: ChannelTypeEnum.PUSH,
+   *   credentials: pusherBeamsConfig,
+   *   docReference: 'https://docs.novu.co/channels-and-providers/push/pusher-beams',
+   *   logoFileName: { light: 'pusher-beams.svg', dark: 'pusher-beams.svg' },
+   * },
+   */
 ];

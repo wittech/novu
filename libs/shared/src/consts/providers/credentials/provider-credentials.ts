@@ -1019,3 +1019,141 @@ export const azureSmsConfig: IConfigCredentials[] = [
   },
   ...smsConfigBase,
 ];
+
+export const aliyunSmsConfig: IConfigCredentials[] = [
+  {
+    key: CredentialsKeyEnum.ApiKey,
+    displayName: 'AccessKeyId',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.SecretKey,
+    displayName: 'AccessKeySecret',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.BaseUrl,
+    displayName: 'Endpoint',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.HttpProxy,
+    displayName: 'HttpProxy',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.HttpsProxy,
+    displayName: 'HttpsProxy',
+    type: 'string',
+    required: false,
+  },
+  ...smsConfigBase,
+];
+
+export const aliyunVmsConfig: IConfigCredentials[] = [
+  {
+    key: CredentialsKeyEnum.ApiKey,
+    displayName: 'AccessKeyId',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.SecretKey,
+    displayName: 'AccessKeySecret',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.BaseUrl,
+    displayName: 'Endpoint',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.HttpProxy,
+    displayName: 'HttpProxy',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.HttpsProxy,
+    displayName: 'HttpsProxy',
+    type: 'string',
+    required: false,
+  },
+  ...smsConfigBase,
+];
+
+export const wechatConfig: IConfigCredentials[] = [
+  {
+    key: CredentialsKeyEnum.AppID,
+    displayName: 'AppId',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.SecretKey,
+    displayName: 'Secret',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.HttpProxy,
+    displayName: 'HttpProxy',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.HttpsProxy,
+    displayName: 'HttpsProxy',
+    type: 'string',
+    required: false,
+  },
+];
+
+export const openimConfig: IConfigCredentials[] = [
+  {
+    key: CredentialsKeyEnum.BaseUrl,
+    displayName: 'Endpoint',
+    type: 'string',
+    required: true,
+  },
+];
+
+export const hongyanSmsConfig: IConfigCredentials[] = [
+  {
+    key: CredentialsKeyEnum.BaseUrl,
+    displayName: 'Endpoint',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.AppID,
+    displayName: 'AppKey',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.SecretKey,
+    displayName: 'SecretKey',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.HttpProxy,
+    displayName: 'HttpProxy',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.HttpsProxy,
+    displayName: 'HttpsProxy',
+    type: 'string',
+    required: false,
+  },
+  ...smsConfigBase,
+];

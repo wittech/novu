@@ -73,6 +73,7 @@ export enum EmailProviderIdEnum {
 
 export enum SmsProviderIdEnum {
   AliyunSms = 'aliyun-sms',
+  HongyanSms = 'hongyan-sms',
   AliyunVms = 'aliyun-vms',
   Nexmo = 'nexmo',
   Plivo = 'plivo',
@@ -105,6 +106,8 @@ export enum SmsProviderIdEnum {
 export enum ChatProviderIdEnum {
   Wechat = 'wechat',
   Openim = 'openim',
+  Ykz = 'ykz',
+  Ykb = 'ykb',
   Slack = 'slack',
   Discord = 'discord',
   MsTeams = 'msteams',

@@ -13,7 +13,6 @@ export class HongyanSmsProvider implements ISmsProvider {
   id = 'hongyan-sms';
   channelType = ChannelTypeEnum.SMS as ChannelTypeEnum.SMS;
   private msgSendPath = '/dubbo/openapi/message/send';
-  private axiosInstance = axios.create();
   private smsConfig: any = {};
   constructor(
     private config: {
@@ -60,6 +59,7 @@ export class HongyanSmsProvider implements ISmsProvider {
       this.msgSendPath,
       this.smsConfig.appKey
     );
+    console.log('md5DigestAsHex', md5DigestAsHex, options, this.smsConfig);
     const header = {
       timestamp: timestamp,
       appKey: this.smsConfig.appKey,
@@ -72,18 +72,22 @@ export class HongyanSmsProvider implements ISmsProvider {
       mobile: options.to,
       content: options.content,
     };
-    const { data } = await this.axiosInstance.post(
-      `${this.smsConfig.endpoint}${this.msgSendPath}`,
-      queryString.stringify(msgParams),
-      {
-        headers: header,
-      }
-    );
-    console.log(md5DigestAsHex, data);
+    try {
+      const { data } = await axios.post(
+        `${this.smsConfig.endpoint}${this.msgSendPath}`,
+        queryString.stringify(msgParams),
+        {
+          headers: header,
+        }
+      );
+      console.log('返回值', data);
 
-    return {
-      id: options.id,
-      date: new Date().toISOString(),
-    };
+      return {
+        id: options.id,
+        date: new Date().toISOString(),
+      };
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 }

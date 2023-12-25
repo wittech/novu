@@ -1,12 +1,15 @@
 import { HongyanSmsProvider } from './hongyan-sms.provider';
 
-test('should trigger aliyun-sms correctly', async () => {
-  /*
-   * const provider = new Sms77SmsProvider({
-   *   apiKey: '<sms77-api-key>',
-   *   from: '+1145678',
-   * });
-   */
+test('should trigger hongyan-sms correctly', async () => {
+  const provider = new HongyanSmsProvider({
+    appKey: '1',
+    secretKey: '2',
+    endpoint: 'http://127.0.0.1',
+  });
+  await provider.sendMessage({
+    to: '13093857463',
+    content: 'Test',
+  });
   /*
    * const spy = jest
    *   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

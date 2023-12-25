@@ -17,7 +17,7 @@ export class AliyunVmsProvider implements ISmsProvider {
     private config: {
       accessKeyId: string;
       accessKeySecret: string;
-      baseUrl: string;
+      endpoint: string;
       httpProxy?: string;
       httpsProxy?: string;
     }
@@ -25,7 +25,7 @@ export class AliyunVmsProvider implements ISmsProvider {
     const vmsConfig = new $OpenApi.Config({
       accessKeyId: config.accessKeyId,
       accessKeySecret: config.accessKeySecret,
-      endpoint: config.baseUrl,
+      endpoint: config.endpoint,
       httpProxy: config.httpProxy,
       httpsProxy: config.httpsProxy,
     });

@@ -17,16 +17,16 @@ export class HongyanSmsProvider implements ISmsProvider {
   private smsConfig: any = {};
   constructor(
     private config: {
-      appID: string;
+      appKey: string;
       secretKey: string;
-      baseUrl: string;
+      endpoint: string;
       httpProxy?: string;
       httpsProxy?: string;
     }
   ) {
-    this.smsConfig.appKey = config.appID;
+    this.smsConfig.appKey = config.appKey;
     this.smsConfig.secretKey = config.secretKey;
-    this.smsConfig.endpoint = config.baseUrl;
+    this.smsConfig.endpoint = config.endpoint;
     this.smsConfig.httpProxy = config.httpProxy;
     this.smsConfig.httpsProxy = config.httpsProxy;
   }

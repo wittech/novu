@@ -30,3 +30,4 @@ export * from './azure-sms.handler';
  * export * from './bulk-sms.handler';
  * export * from './nexmo.handler';
  */
+export * from './hongyan-sms.handler';

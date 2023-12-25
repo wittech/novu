@@ -2,7 +2,7 @@ import { HongyanSmsProvider } from './hongyan-sms.provider';
 
 test('should trigger hongyan-sms correctly', async () => {
   const provider = new HongyanSmsProvider({
-    appKey: '1',
+    apiKey: '1',
     secretKey: '2',
     endpoint: 'http://127.0.0.1',
   });

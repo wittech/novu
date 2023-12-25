@@ -8,7 +8,7 @@ export class HongyanSmsHandler extends BaseSmsHandler {
   }
   buildProvider(credentials: ICredentials) {
     this.provider = new HongyanSmsProvider({
-      appKey: credentials.appID,
+      apiKey: credentials.apiKey,
       secretKey: credentials.secretKey,
       endpoint: credentials.baseUrl,
       httpProxy: credentials.httpProxy,

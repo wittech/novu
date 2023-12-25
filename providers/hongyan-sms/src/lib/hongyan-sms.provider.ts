@@ -16,14 +16,14 @@ export class HongyanSmsProvider implements ISmsProvider {
   private smsConfig: any = {};
   constructor(
     private config: {
-      appKey: string;
+      apiKey: string;
       secretKey: string;
       endpoint: string;
       httpProxy?: string;
       httpsProxy?: string;
     }
   ) {
-    this.smsConfig.appKey = config.appKey;
+    this.smsConfig.apiKey = config.apiKey;
     this.smsConfig.secretKey = config.secretKey;
     this.smsConfig.endpoint = config.endpoint;
     this.smsConfig.httpProxy = config.httpProxy;
@@ -57,18 +57,18 @@ export class HongyanSmsProvider implements ISmsProvider {
     const md5DigestAsHex = await this.sign(
       timestamp,
       this.msgSendPath,
-      this.smsConfig.appKey
+      this.smsConfig.apiKey
     );
     console.log('md5DigestAsHex', md5DigestAsHex, options, this.smsConfig);
     const header = {
       timestamp: timestamp,
-      appKey: this.smsConfig.appKey,
+      appKey: this.smsConfig.apiKey,
       version: '1.0.0',
       clientId: '1',
       sign: md5DigestAsHex,
     };
     const msgParams = {
-      resourceId: this.smsConfig.appKey,
+      resourceId: this.smsConfig.apiKey,
       mobile: options.to,
       content: options.content,
     };

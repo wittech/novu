@@ -1132,8 +1132,8 @@ export const hongyanSmsConfig: IConfigCredentials[] = [
     required: true,
   },
   {
-    key: CredentialsKeyEnum.AppID,
-    displayName: 'AppKey',
+    key: CredentialsKeyEnum.ApiKey,
+    displayName: 'ApiKey',
     type: 'string',
     required: true,
   },

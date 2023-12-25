@@ -12,7 +12,7 @@ ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 ENV NX_DAEMON=false
 
 RUN npm config set registry https://registry.npmmirror.com --global
-RUN npm i pm2 -g
+RUN npm i pm2 nan -g
 RUN npm --no-update-notifier --no-fund --global install pnpm@8.12.1
 RUN pnpm --version
 

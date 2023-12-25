@@ -13,7 +13,7 @@ ENV NX_DAEMON=false
 WORKDIR /usr/src/app
 RUN npm config set registry https://registry.npmmirror.com --global
 RUN npm install -g pnpm@8.12.1 --loglevel notice
-RUN npm i pm2 -g
+RUN npm i pm2 nan -g
 
 COPY .npmrc .
 COPY .npmrc-cloud .

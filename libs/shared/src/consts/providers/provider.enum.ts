@@ -118,6 +118,7 @@ export enum ChatProviderIdEnum {
   Zulip = 'zulip',
   GrafanaOnCall = 'grafana-on-call',
   GetStream = 'getstream',
+  RocketChat = 'rocket-chat',
 }
 
 export enum PushProviderIdEnum {

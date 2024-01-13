@@ -1117,7 +1117,7 @@ export const aliyunVmsConfig: IConfigCredentials[] = [
 
 export const wechatConfig: IConfigCredentials[] = [
   {
-    key: CredentialsKeyEnum.AppID,
+    key: CredentialsKeyEnum.ApplicationId,
     displayName: 'AppId',
     type: 'string',
     required: true,

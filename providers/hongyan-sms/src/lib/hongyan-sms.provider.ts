@@ -59,7 +59,6 @@ export class HongyanSmsProvider implements ISmsProvider {
       this.msgSendPath,
       this.smsConfig.apiKey
     );
-    console.log('md5DigestAsHex', md5DigestAsHex, options, this.smsConfig);
     const header = {
       timestamp: timestamp,
       appKey: this.smsConfig.apiKey,
@@ -72,22 +71,23 @@ export class HongyanSmsProvider implements ISmsProvider {
       mobile: options.to,
       content: options.content,
     };
-    try {
-      const { data } = await axios.post(
-        `${this.smsConfig.endpoint}${this.msgSendPath}`,
-        queryString.stringify(msgParams),
-        {
-          headers: header,
-        }
-      );
-      console.log('返回值', data);
+    const { data } = await axios.post(
+      `${this.smsConfig.endpoint}${this.msgSendPath}`,
+      queryString.stringify(msgParams),
+      {
+        headers: header,
+      }
+    );
 
+    if (data && data.code === 200) {
       return {
         id: options.id,
         date: new Date().toISOString(),
       };
-    } catch (e) {
-      throw new Error(e);
+    } else if (data) {
+      throw new Error('发送短信失败，返回值：' + JSON.stringify(data));
+    } else {
+      throw new Error('发送短信失败，返回值非200');
     }
   }
 }

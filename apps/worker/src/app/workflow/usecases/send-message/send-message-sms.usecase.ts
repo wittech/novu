@@ -293,6 +293,7 @@ export class SendMessageSms extends SendMessageBase {
         from: overrides.from || integration.credentials.from,
         content: overrides.content || content,
         id: message._id,
+        payload: message.payload, //增加payload，用于传递发送短信的额外参数，比如模板名称、签名等信息
       });
 
       const metadata = CreateExecutionDetailsCommand.getExecutionLogMetadata();
@@ -347,7 +348,7 @@ export class SendMessageSms extends SendMessageBase {
           status: ExecutionDetailsStatusEnum.FAILED,
           isTest: false,
           isRetry: false,
-          raw: JSON.stringify(e),
+          raw: JSON.stringify({ message: e.message || e.name }),
         }),
         groupId: command.organizationId,
       });

@@ -36,32 +36,33 @@ export class AliyunSmsProvider implements ISmsProvider {
   async sendMessage(
     options: ISmsOptions
   ): Promise<ISendMessageSuccessResponse> {
-    if (!options.config?.templateCode) {
-      throw new Error('未获取到短息模板code，请重新配置！');
+    if (!options.payload?.templateCode) {
+      throw new Error(
+        '未获取到短信模板code，请重新配置！传入值：' + JSON.stringify(options)
+      );
     }
     const params = new $Dysmsapi20170525.SendSmsRequest({
       // 接收短信的手机号码
       phoneNumbers: options.to,
       // 短信签名名称
-      signName: options.config?.signName,
+      signName: options.payload?.signName,
       // 短信模板CODE
-      templateCode: options.config?.templateCode,
+      templateCode: options.payload?.templateCode,
       // 短信模板变量对应的实际值
-      templateParam: options.config?.templateParam,
+      templateParam: options.payload?.templateParam,
       outId: options.id,
     });
 
-    const smsResponse = await this.aliSmsClient.sendSms(params);
-    if (smsResponse.body.code === 'OK') {
+    const { body } = await this.aliSmsClient.sendSms(params);
+    if (body && body.code === 'OK') {
       return {
-        id: smsResponse.body.bizId,
+        id: body.bizId,
         date: new Date().toISOString(),
       };
+    } else if (body) {
+      throw new Error('发送短信失败，返回值：' + JSON.stringify(body));
     } else {
-      return {
-        id: undefined,
-        date: new Date().toISOString(),
-      };
+      throw new Error('发送短信失败，返回值非200');
     }
   }
 }

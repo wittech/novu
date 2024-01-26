@@ -275,6 +275,7 @@ export class SendMessageSms extends SendMessageBase {
         content: overrides.content || content,
         id: message._id,
         payload: message.payload, //增加payload，用于传递发送短信的额外参数，比如模板名称、签名等信息
+        customData: overrides.customData || {},
       });
 
       await this.executionLogRoute.execute(

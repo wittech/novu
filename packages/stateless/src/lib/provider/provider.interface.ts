@@ -34,19 +34,7 @@ export interface ISmsOptions {
   attachments?: IAttachmentOptions[];
   id?: string;
   payload?: any; // 增加payload参数用于传递短信发送额外参数
-  /*
-   * payload?: {
-   *   signName?: string;
-   *   smsUpExtendCode?: string;
-   *   templateCode?: string;
-   *   templateParam?: string;
-   *   calledShowNumber?: string;
-   *   voiceCode?: string;
-   *   playTimes?: number;
-   *   volume?: number;
-   *   speed?: number;
-   * };
-   */
+  customData?: Record<string, any>;
 }
 export interface IPushOptions {
   target: string[];

@@ -103,6 +103,7 @@ export enum SmsProviderIdEnum {
   MessageBird = 'messagebird',
   Simpletexting = 'simpletexting',
   AzureSms = 'azure-sms',
+  BrevoSms = 'brevo-sms',
 }
 
 export enum ChatProviderIdEnum {

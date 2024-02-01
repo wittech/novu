@@ -35,16 +35,15 @@ COPY --chown=1000:1000 packages/application-generic ./packages/application-gener
 
 COPY --chown=1000:1000 ["tsconfig.json","tsconfig.base.json","nx.json","pnpm-workspace.yaml","pnpm-lock.yaml", ".npmrc", "./"]
 
-RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise Edition of Novu' ; fi
-RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
-RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc; fi
+RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
+    if [ -n "${BULL_MQ_PRO_NPM_TOKEN}" ] ; then echo 'Building with Enterprise Edition of Novu'; rm -f .npmrc ; cp .npmrc-cloud .npmrc ; fi
 
-# https://www.npmjs.com/package/@newrelic/native-metrics
-# RUN export NR_NATIVE_METRICS_NO_BUILD=true
-RUN pnpm install
-RUN pnpm build:ws
+RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
+    pnpm install --reporter=silent && \
+    pnpm build:ws
 
-RUN if $BULL_MQ_PRO_NPM_TOKEN ; then rm -f .npmrc ; fi
+RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
+    if $BULL_MQ_PRO_NPM_TOKEN ; then rm -f .npmrc ; fi
 
 WORKDIR /usr/src/app/apps/ws
 

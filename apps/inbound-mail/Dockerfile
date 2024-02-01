@@ -10,8 +10,6 @@ RUN apk --update --no-cache add make gcc g++ python3 curl
 # Avoid "gyp ERR! stack Error: certificate has expired"
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
-ARG BULL_MQ_PRO_TOKEN
-ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
 ENV NX_DAEMON=false
 
 RUN npm config set registry https://registry.npmmirror.com --global
@@ -30,11 +28,11 @@ COPY --chown=1000:1000 ./meta .
 COPY --chown=1000:1000 ./deps .
 COPY --chown=1000:1000 ./pkg .
 
-RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ] ; then echo 'Building with Enterprise Edition of Novu' ; fi
-RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then rm -f .npmrc ; fi
-RUN if [ -n '${BULL_MQ_PRO_NPM_TOKEN}' ]; then cp .npmrc-cloud .npmrc; fi
+RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
+    if [ -n "${BULL_MQ_PRO_NPM_TOKEN}" ] ; then echo 'Building with Enterprise Edition of Novu'; rm -f .npmrc ; cp .npmrc-cloud .npmrc ; fi
 
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
+    --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
  pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --no-frozen-lockfile\
  --unsafe-perm
@@ -73,6 +71,7 @@ COPY --chown=1000:1000 ./meta .
 COPY --chown=1000:1000 --from=assets /usr/src/app .
 
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
+    --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
  pnpm install --reporter=silent --filter "{${PACKAGE_PATH}}..."\
  --no-frozen-lockfile\
  --unsafe-perm

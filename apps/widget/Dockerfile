@@ -2,8 +2,8 @@ FROM node:20-alpine
 # 更新为国内源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
-ENV http_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
-ENV https_proxy=http://squid_proxy:c6a3e6520dbe5b619525f3b0c70ba5e9@192.168.150.31:13128
+
+
 # Build dependencies
 RUN apk --update --no-cache add make gcc g++ python3 curl
 ENV NX_DAEMON=false

@@ -59,15 +59,15 @@ RUN npm config set registry https://registry.npmmirror.com --global
 RUN apk --update --no-cache add bash
 RUN npm install -g pnpm@8.12.1 http-server --loglevel notice
 
-USER 1000
+
 WORKDIR /app
 
-COPY --chown=1000:1000 --from=builder /usr/src/app/apps/web/env.sh /app/env.sh
-COPY --chown=1000:1000 --from=builder /usr/src/app/apps/web/.env /app/.env
+COPY  --from=builder /usr/src/app/apps/web/env.sh /app/env.sh
+COPY  --from=builder /usr/src/app/apps/web/.env /app/.env
 
-COPY --chown=1000:1000 --from=builder /usr/src/app/apps/web/build /app/build
-COPY --chown=1000:1000 --from=builder /usr/src/app/apps/web/public /app/public
-COPY --chown=1000:1000 --from=builder /usr/src/app/apps/web/package.json /app/package.json
+COPY  --from=builder /usr/src/app/apps/web/build /app/build
+COPY  --from=builder /usr/src/app/apps/web/public /app/public
+COPY  --from=builder /usr/src/app/apps/web/package.json /app/package.json
 
 CMD [ "pnpm", "start:static:build" ]
 # end production stage

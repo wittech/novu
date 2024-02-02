@@ -14,16 +14,16 @@ RUN npm i pm2 nan -g
 RUN npm --no-update-notifier --no-fund --global install pnpm@8.12.1
 RUN pnpm --version
 
-USER 1000
+
 WORKDIR /usr/src/app
 
 # ------- DEV BUILD ----------
 FROM dev_base AS dev
 ARG PACKAGE_PATH
 
-COPY --chown=1000:1000 ./meta .
-COPY --chown=1000:1000 ./deps .
-COPY --chown=1000:1000 ./pkg .
+COPY  ./meta .
+COPY  ./deps .
+COPY  ./pkg .
 
 RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
     if [ -n "${BULL_MQ_PRO_NPM_TOKEN}" ] ; then echo 'Building with Enterprise Edition of Novu'; rm -f .npmrc ; cp .npmrc-cloud .npmrc ; fi
@@ -62,10 +62,10 @@ ENV CI=true
 
 WORKDIR /usr/src/app
 
-COPY --chown=1000:1000 ./meta .
+COPY  ./meta .
 
 # Get the build artifacts that only include dist folders
-COPY --chown=1000:1000 --from=assets /usr/src/app .
+COPY  --from=assets /usr/src/app .
 
 RUN --mount=type=cache,id=pnpm-store-api,target=/root/.pnpm-store\
     --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \

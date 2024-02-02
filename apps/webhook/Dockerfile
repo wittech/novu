@@ -16,7 +16,7 @@ RUN npm i pm2 nan -g
 RUN npm --no-update-notifier --no-fund --global install pnpm@8.12.1
 RUN pnpm --version
 
-USER 1000
+
 WORKDIR /usr/src/app
 
 # ------- DEV BUILD ----------
@@ -24,9 +24,9 @@ FROM dev_base AS dev
 ARG PACKAGE_PATH
 
 
-COPY --chown=1000:1000 ./meta .
-COPY --chown=1000:1000 ./deps .
-COPY --chown=1000:1000 ./pkg .
+COPY  ./meta .
+COPY  ./deps .
+COPY  ./pkg .
 
 RUN --mount=type=cache,id=pnpm-store-webhook,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
@@ -60,10 +60,10 @@ ENV CI=true
 
 WORKDIR /usr/src/app
 
-COPY --chown=1000:1000 ./meta .
+COPY  ./meta .
 
 # Get the build artifacts that only include dist folders
-COPY --chown=1000:1000 --from=assets /usr/src/app .
+COPY  --from=assets /usr/src/app .
 
 RUN --mount=type=cache,id=pnpm-store-webhook,target=/root/.pnpm-store\
  pnpm install --reporter=silent --filter "{${PACKAGE_PATH}}..."\

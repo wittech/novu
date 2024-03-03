@@ -37,7 +37,7 @@ RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
  --no-frozen-lockfile\
  --unsafe-perm
 
-RUN NODE_ENV=production NX_DAEMON=false pnpm build:worker
+RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && NODE_ENV=production NX_DAEMON=false pnpm build:worker
 
 WORKDIR /usr/src/app/apps/worker
 

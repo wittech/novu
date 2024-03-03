@@ -20,8 +20,8 @@ import {
 } from '../credentials';
 import { IProviderConfig } from '../provider.interface';
 import { EmailProviderIdEnum } from '../provider.enum';
-
 import { ChannelTypeEnum } from '../../../types';
+import { UTM_CAMPAIGN_QUERY_PARAM } from '../../../ui';
 
 export const emailProviders: IProviderConfig[] = [
   {
@@ -29,7 +29,7 @@ export const emailProviders: IProviderConfig[] = [
     displayName: 'Novu Email',
     channel: ChannelTypeEnum.EMAIL,
     credentials: [],
-    docReference: 'https://docs.novu.co/channels-and-providers/default-providers#novu-email-provider',
+    docReference: `https://docs.novu.co/channels-and-providers/default-providers${UTM_CAMPAIGN_QUERY_PARAM}#novu-email-provider`,
     logoFileName: { light: 'novu.png', dark: 'novu.png' },
   },
   /*
@@ -79,7 +79,7 @@ export const emailProviders: IProviderConfig[] = [
     displayName: 'SendGrid',
     channel: ChannelTypeEnum.EMAIL,
     credentials: sendgridConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/email/sendgrid',
+    docReference: `https://docs.novu.co/channels-and-providers/email/sendgrid${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'sendgrid.png', dark: 'sendgrid.png' },
   },
   /*
@@ -113,7 +113,7 @@ export const emailProviders: IProviderConfig[] = [
     displayName: 'Custom SMTP',
     channel: ChannelTypeEnum.EMAIL,
     credentials: nodemailerConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/email/custom-smtp',
+    docReference: `https://docs.novu.co/channels-and-providers/email/custom-smtp${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'custom_smtp.svg', dark: 'custom_smtp.svg' },
   },
   /*
@@ -131,7 +131,7 @@ export const emailProviders: IProviderConfig[] = [
     displayName: 'Microsoft Outlook365',
     channel: ChannelTypeEnum.EMAIL,
     credentials: outlook365Config,
-    docReference: 'https://docs.novu.co/channels-and-providers/email/outlook365',
+    docReference: `https://docs.novu.co/channels-and-providers/email/outlook365${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'outlook365.png', dark: 'outlook365.png' },
   },
   /*
@@ -182,7 +182,7 @@ export const emailProviders: IProviderConfig[] = [
     channel: ChannelTypeEnum.EMAIL,
     credentials: emailWebhookConfig,
     betaVersion: true,
-    docReference: 'https://docs.novu.co/channels/email/email-webhook/',
+    docReference: `https://docs.novu.co/channels/email/email-webhook${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'email_webhook.svg', dark: 'email_webhook.svg' },
   },
 ];

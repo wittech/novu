@@ -2,8 +2,8 @@ import { IConfigCredentials, IProviderConfig } from '../provider.interface';
 import { grafanaOnCallConfig, slackConfig, getstreamConfig, wechatConfig, openimConfig } from '../credentials';
 
 import { ChatProviderIdEnum } from '../provider.enum';
-
 import { ChannelTypeEnum } from '../../../types';
+import { UTM_CAMPAIGN_QUERY_PARAM } from '../../../ui';
 
 export const chatProviders: IProviderConfig[] = [
   /*

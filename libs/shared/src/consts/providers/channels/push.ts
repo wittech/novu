@@ -12,6 +12,7 @@ import { PushProviderIdEnum } from '../provider.enum';
 import { IProviderConfig } from '../provider.interface';
 
 import { ChannelTypeEnum } from '../../../types';
+import { UTM_CAMPAIGN_QUERY_PARAM } from '../../../ui';
 
 export const pushProviders: IProviderConfig[] = [
   /*
@@ -37,7 +38,7 @@ export const pushProviders: IProviderConfig[] = [
     displayName: 'Firebase Cloud Messaging',
     channel: ChannelTypeEnum.PUSH,
     credentials: fcmConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/fcm',
+    docReference: `https://docs.novu.co/channels-and-providers/push/fcm${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'fcm.svg', dark: 'fcm.svg' },
   },
   {
@@ -45,7 +46,7 @@ export const pushProviders: IProviderConfig[] = [
     displayName: 'Expo Push',
     channel: ChannelTypeEnum.PUSH,
     credentials: expoConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/expo-push',
+    docReference: `https://docs.novu.co/channels-and-providers/push/expo-push${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'expo.svg', dark: 'expo.svg' },
   },
   {
@@ -53,7 +54,7 @@ export const pushProviders: IProviderConfig[] = [
     displayName: 'APNs',
     channel: ChannelTypeEnum.PUSH,
     credentials: apnsConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/apns',
+    docReference: `https://docs.novu.co/channels-and-providers/push/apns${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'apns.png', dark: 'apns.png' },
     betaVersion: true,
   },
@@ -62,7 +63,7 @@ export const pushProviders: IProviderConfig[] = [
     displayName: 'Push Webhook',
     channel: ChannelTypeEnum.PUSH,
     credentials: pushWebhookConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/push/push-webhook',
+    docReference: `https://docs.novu.co/channels-and-providers/push/push-webhook${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'push-webhook.svg', dark: 'push-webhook.svg' },
     betaVersion: true,
   },

@@ -38,6 +38,7 @@ import {
 import { SmsProviderIdEnum } from '../provider.enum';
 
 import { ChannelTypeEnum } from '../../../types';
+import { UTM_CAMPAIGN_QUERY_PARAM } from '../../../ui';
 
 export const smsProviders: IProviderConfig[] = [
   {
@@ -61,7 +62,7 @@ export const smsProviders: IProviderConfig[] = [
     displayName: 'Novu SMS',
     channel: ChannelTypeEnum.SMS,
     credentials: [],
-    docReference: 'https://docs.novu.co/channels-and-providers/default-providers#novu-sms-provider',
+    docReference: `https://docs.novu.co/channels-and-providers/default-providers${UTM_CAMPAIGN_QUERY_PARAM}#novu-sms-provider`,
     logoFileName: { light: 'novu.png', dark: 'novu.png' },
   },
   /*
@@ -122,7 +123,7 @@ export const smsProviders: IProviderConfig[] = [
     displayName: 'Twilio',
     channel: ChannelTypeEnum.SMS,
     credentials: twilioConfig,
-    docReference: 'https://docs.novu.co/channels-and-providers/sms/twilio',
+    docReference: `https://docs.novu.co/channels-and-providers/sms/twilio${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'twilio.png', dark: 'twilio.png' },
   },
   /*
@@ -240,7 +241,7 @@ export const smsProviders: IProviderConfig[] = [
     displayName: `Generic SMS`,
     channel: ChannelTypeEnum.SMS,
     credentials: genericSmsConfig,
-    docReference: 'https://docs.novu.co/channels/sms/generic-sms',
+    docReference: `https://docs.novu.co/channels/sms/generic-sms${UTM_CAMPAIGN_QUERY_PARAM}`,
     logoFileName: { light: 'generic-sms.svg', dark: 'generic-sms.svg' },
   },
   /*

@@ -3,9 +3,8 @@ FROM node:20-alpine
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 
-
 # Build dependencies
-RUN apk --update --no-cache add make gcc g++ python3 curl
+RUN apk --no-cache add g++ make py3-pip
 ARG BULL_MQ_PRO_TOKEN
 ENV BULL_MQ_PRO_NPM_TOKEN=$BULL_MQ_PRO_TOKEN
 ENV NX_DAEMON=false
@@ -14,7 +13,6 @@ WORKDIR /usr/src/app
 RUN npm config set registry https://registry.npmmirror.com --global
 RUN npm install -g pnpm@8.12.1 --loglevel notice
 RUN npm i pm2 nan -g
-
 
 WORKDIR /usr/src/app
 
@@ -39,7 +37,7 @@ RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM
     if [ -n "${BULL_MQ_PRO_NPM_TOKEN}" ] ; then echo 'Building with Enterprise Edition of Novu'; rm -f .npmrc ; cp .npmrc-cloud .npmrc ; fi
 
 RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
-    pnpm install --reporter=silent && \
+    pnpm install --verbose && \
     pnpm build:ws
 
 RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \

@@ -3,9 +3,8 @@ FROM node:20-alpine as dev_base
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 
-
 # Build dependencies
-RUN apk --update --no-cache add make gcc g++ python3 curl
+RUN apk add g++ make py3-pip
 
 ENV NX_DAEMON=false
 
@@ -34,7 +33,7 @@ RUN --mount=type=cache,id=pnpm-store-api,target=/root/.pnpm-store\
  --no-frozen-lockfile\
  --unsafe-perm
 
-RUN NODE_ENV=production NX_DAEMON=false pnpm build:api
+RUN NODE_ENV=production NX_DAEMON=false pnpm build:api --skip-nx-cache
 
 WORKDIR /usr/src/app/apps/api
 

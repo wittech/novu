@@ -4,7 +4,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 # 设置环境变量
 
 # Build dependencies
-RUN apk --update --no-cache add make gcc g++ python3 curl
+RUN apk add --no-cache bash g++ make py3-pip
 ENV NX_DAEMON=false
 WORKDIR /usr/src/app
 RUN npm config set registry https://registry.npmmirror.com --global

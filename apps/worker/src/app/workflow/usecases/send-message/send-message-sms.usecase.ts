@@ -323,7 +323,7 @@ export class SendMessageSms extends SendMessageBase {
           status: ExecutionDetailsStatusEnum.FAILED,
           isTest: false,
           isRetry: false,
-          raw: JSON.stringify({ message: e.message || e.name }),
+          raw: JSON.stringify({ message: e.message, name: e.name }),
         })
       );
     }

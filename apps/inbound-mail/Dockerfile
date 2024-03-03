@@ -3,9 +3,8 @@ FROM node:20-alpine as dev_base
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 
-
 # Build dependencies
-RUN apk --update --no-cache add make gcc g++ python3 curl
+RUN apk add g++ make py3-pip
 
 # Avoid "gyp ERR! stack Error: certificate has expired"
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0

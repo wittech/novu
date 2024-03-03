@@ -1,7 +1,7 @@
 # start build stage
 FROM node:20-alpine as builder
 # 更新为国内源
-#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 
 # Build dependencies
@@ -50,7 +50,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 # 更新为国内源
-#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
 
 

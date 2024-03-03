@@ -1,14 +1,17 @@
 FROM node:20-alpine as dev_base
 # 更新为国内源
-#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 # 设置环境变量
+# Docker buildx构建Alpine镜像出现temporary error (try again later)
+# https://blog.csdn.net/u012586326/article/details/125009969
+
+# Avoid "gyp ERR! stack Error: certificate has expired"
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 # Build dependencies
 RUN apk --update --no-cache add make gcc g++ python3 curl
 # https://github.com/newrelic/node-native-metrics/pull/112
 # RUN apk --update --no-cache add libexecinfo libexecinfo-de
-# Avoid "gyp ERR! stack Error: certificate has expired"
-ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 ENV NX_DAEMON=false
 

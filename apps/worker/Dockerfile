@@ -4,7 +4,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 # 设置环境变量
 
 # Build dependencies
-RUN apk --update --no-cache add curl g++ make py3-pip
+RUN apk --update --no-cache add make gcc g++ python3 curl
 # https://github.com/newrelic/node-native-metrics/pull/112
 # RUN apk --update --no-cache add libexecinfo libexecinfo-de
 # Avoid "gyp ERR! stack Error: certificate has expired"

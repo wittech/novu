@@ -263,6 +263,8 @@ export class SendMessageSms extends SendMessageBase {
     overrides: Record<string, any> = {}
   ) {
     try {
+      const chimeraBody = command.chimeraData?.outputs.body;
+
       const smsFactory = new SmsFactory();
       const smsHandler = smsFactory.getHandler(this.buildFactoryIntegration(integration));
       if (!smsHandler) {
@@ -272,7 +274,7 @@ export class SendMessageSms extends SendMessageBase {
       const result = await smsHandler.send({
         to: overrides.to || phone,
         from: overrides.from || integration.credentials.from,
-        content: overrides.content || content,
+        content: chimeraBody || overrides.content || content,
         id: message._id,
         payload: message.payload, //增加payload，用于传递发送短信的额外参数，比如模板名称、签名等信息
         customData: overrides.customData || {},

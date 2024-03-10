@@ -22,6 +22,7 @@ export class OpenimProvider implements IChatProvider {
   async sendMessage(data: IChatOptions): Promise<ISendMessageSuccessResponse> {
     const response = await this.axiosInstance.post(data.webhookUrl, {
       text: data.content,
+      blocks: data.blocks,
     });
 
     return {

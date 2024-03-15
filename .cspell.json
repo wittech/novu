@@ -567,6 +567,9 @@
     "upserted",
     "upstash",
     "Upstash",
+    "usecase",
+    "USECASE",
+    "Vonage",
     "Krakend",
     "ratelimit",
     "Ratelimit",
@@ -592,6 +595,7 @@
     "restapi",
     "ringcentral",
     "reshard",
+    "WaitList",
     "userid",
     "endgroup",
     "aliyun",
@@ -604,8 +608,14 @@
     "Pyroscope",
     "PYROSCOPE",
     "usecases",
+    "hbspt", 
+    "prepopulating",
+    "Vonage",
+    "fieldtype",
     "usecase",
-    "zulip"
+    "zulip",
+    "uuidv",
+    "Vonage"
   ],
   "flagWords": [],
   "patterns": [

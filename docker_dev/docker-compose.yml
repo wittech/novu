@@ -21,7 +21,7 @@ services:
     volumes:
       - mongodb:/data/db
     ports:
-      - 27017:27017
+      - 27018:27017
   api:
     image: 'novu-api'
     depends_on:

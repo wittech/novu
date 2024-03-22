@@ -1,5 +1,5 @@
 import './CustomCodeEditor.css';
-import { Editor, Monaco as MonacoEditor, loader } from '@monaco-editor/react';
+import { Editor, loader } from '@monaco-editor/react';
 import { Card, Loader, useMantineColorScheme } from '@mantine/core';
 import { useCallback, useEffect, useRef } from 'react';
 import { colors } from '@novu/design-system';
@@ -64,7 +64,7 @@ const CustomCodeEditorBase = ({
   const { readonly } = useEnvController();
 
   const editorRef = useRef<NEditor.IStandaloneCodeEditor | null>(null);
-  const monacoRef = useRef<MonacoEditor | null>(null);
+  const monacoRef = useRef<monaco.Monaco | null>(null);
   const decoratorsRef = useRef<NEditor.IEditorDecorationsCollection | null>(null);
 
   useEffect(() => {

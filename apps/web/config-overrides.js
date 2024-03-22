@@ -2,10 +2,12 @@ const { useBabelRc, override } = require('customize-cra');
 const { DefinePlugin } = require('webpack');
 const { version } = require('./package.json');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 function overrideConfig(config, env) {
   const plugins = [
     ...config.plugins,
+    new MonacoWebpackPlugin(),
     new DefinePlugin({
       'process.env.NOVU_VERSION': JSON.stringify(version),
     }),

@@ -75,7 +75,8 @@ const CustomCodeEditorBase = ({
   }, [isDark]);
 
   const getSuggestions = useCallback(
-    (monacoInstance, range) => allVariables.map((el) => ({ ...el, kind: monacoInstance.languages.CompletionItemKind.Function, range })),
+    (monacoInstance, range) =>
+     allVariables.map((el) => ({ ...el, kind: monacoInstance.languages.CompletionItemKind.Function, range })),
     [allVariables]
   );
 

@@ -1,7 +1,7 @@
 import { CONTEXT_PATH, LAUNCH_DARKLY_CLIENT_SIDE_ID, SegmentProvider } from '@novu/shared-web';
-import * as Sentry from '@sentry/react';
+// import * as Sentry from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { withLDProvider } from 'launchdarkly-react-client-sdk';
+// import { withLDProvider } from 'launchdarkly-react-client-sdk';
 import { PropsWithChildren } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
@@ -39,11 +39,13 @@ const Providers: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   );
 };
 
-export default Sentry.withProfiler(
-  withLDProvider({
-    clientSideID: LAUNCH_DARKLY_CLIENT_SIDE_ID,
-    reactOptions: {
-      useCamelCaseFlagKeys: false,
-    },
-  })(Providers)
-);
+// export default Sentry.withProfiler(
+//   withLDProvider({
+//     clientSideID: LAUNCH_DARKLY_CLIENT_SIDE_ID,
+//     reactOptions: {
+//       useCamelCaseFlagKeys: false,
+//     },
+//   })(Providers)
+// );
+
+export default Providers;

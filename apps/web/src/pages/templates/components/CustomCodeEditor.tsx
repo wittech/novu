@@ -75,7 +75,7 @@ const CustomCodeEditorBase = ({
   }, [isDark]);
 
   const getSuggestions = useCallback(
-    (monaco, range) => allVariables.map((el) => ({ ...el, kind: monaco.languages.CompletionItemKind.Function, range })),
+    (monacoInstance, range) => allVariables.map((el) => ({ ...el, kind: monacoInstance.languages.CompletionItemKind.Function, range })),
     [allVariables]
   );
 
@@ -94,10 +94,10 @@ const CustomCodeEditorBase = ({
       defaultLanguage="handlebars"
       defaultValue={''}
       theme={isDark ? 'vs-dark' : 'vs'}
-      onMount={(editor, monaco) => {
+      onMount={(editor, monacoInstance) => {
         const decorators = editor.createDecorationsCollection([]);
 
-        const handle = monaco.languages.registerCompletionItemProvider('handlebars', {
+        const handle = monacoInstance.languages.registerCompletionItemProvider('handlebars', {
           triggerCharacters: ['{'],
           provideCompletionItems: function (model, position) {
             const word = model.getWordUntilPosition(position);
@@ -108,7 +108,7 @@ const CustomCodeEditorBase = ({
               endColumn: word.endColumn,
             };
 
-            const suggestions = getSuggestions(monaco, range);
+            const suggestions = getSuggestions(monacoInstance, range);
 
             return {
               suggestions: suggestions,
@@ -117,7 +117,7 @@ const CustomCodeEditorBase = ({
         });
 
         const themeName = isDark ? 'novu-dark' : 'novu';
-        monaco.editor.defineTheme('novu-dark', {
+        monacoInstance.editor.defineTheme('novu-dark', {
           base: 'vs-dark',
           inherit: true,
           rules: [],
@@ -131,7 +131,7 @@ const CustomCodeEditorBase = ({
           },
         });
 
-        monaco.editor.defineTheme('novu', {
+        monacoInstance.editor.defineTheme('novu', {
           base: 'vs',
           inherit: true,
           rules: [],
@@ -145,11 +145,11 @@ const CustomCodeEditorBase = ({
           },
         });
 
-        monaco.editor.setTheme(themeName);
+        monacoInstance.editor.setTheme(themeName);
 
         decoratorsRef.current = decorators;
         editorRef.current = editor;
-        monacoRef.current = monaco;
+        monacoRef.current = monacoInstance;
         editor.onDidDispose(() => handle?.dispose());
       }}
       options={{

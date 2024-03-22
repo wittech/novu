@@ -8,7 +8,8 @@ import { editor as NEditor } from 'monaco-editor';
 import { createTranslationMarks } from './createTranslationMarks';
 import { IVariable, useWorkflowVariables } from '../../../api/hooks';
 import { useEnvController } from '@novu/shared-web';
-loader.config({ NEditor });
+import * as monaco from 'monaco-editor';
+loader.config({ monaco });
 export const CustomCodeEditor = ({
   onChange,
   value,

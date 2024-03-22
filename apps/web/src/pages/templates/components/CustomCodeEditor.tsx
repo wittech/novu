@@ -1,5 +1,5 @@
 import './CustomCodeEditor.css';
-import { Editor, loader } from '@monaco-editor/react';
+import { Editor, Monaco, loader } from '@monaco-editor/react';
 import { Card, Loader, useMantineColorScheme } from '@mantine/core';
 import { useCallback, useEffect, useRef } from 'react';
 import { colors } from '@novu/design-system';
@@ -8,8 +8,8 @@ import { editor as NEditor } from 'monaco-editor';
 import { createTranslationMarks } from './createTranslationMarks';
 import { IVariable, useWorkflowVariables } from '../../../api/hooks';
 import { useEnvController } from '@novu/shared-web';
-import * as monaco from 'monaco-editor';
-loader.config({ monaco });
+import * as xxx from 'monaco-editor';
+loader.config({ xxx });
 export const CustomCodeEditor = ({
   onChange,
   value,
@@ -64,7 +64,7 @@ const CustomCodeEditorBase = ({
   const { readonly } = useEnvController();
 
   const editorRef = useRef<NEditor.IStandaloneCodeEditor | null>(null);
-  const monacoRef = useRef<monaco.Monaco | null>(null);
+  const monacoRef = useRef<Monaco | null>(null);
   const decoratorsRef = useRef<NEditor.IEditorDecorationsCollection | null>(null);
 
   useEffect(() => {
@@ -75,8 +75,7 @@ const CustomCodeEditorBase = ({
   }, [isDark]);
 
   const getSuggestions = useCallback(
-    (monacoInstance, range) =>
-     allVariables.map((el) => ({ ...el, kind: monacoInstance.languages.CompletionItemKind.Function, range })),
+    (monaco, range) => allVariables.map((el) => ({ ...el, kind: monaco.languages.CompletionItemKind.Function, range })),
     [allVariables]
   );
 
@@ -95,10 +94,10 @@ const CustomCodeEditorBase = ({
       defaultLanguage="handlebars"
       defaultValue={''}
       theme={isDark ? 'vs-dark' : 'vs'}
-      onMount={(editor, monacoInstance) => {
+      onMount={(editor, monaco) => {
         const decorators = editor.createDecorationsCollection([]);
 
-        const handle = monacoInstance.languages.registerCompletionItemProvider('handlebars', {
+        const handle = monaco.languages.registerCompletionItemProvider('handlebars', {
           triggerCharacters: ['{'],
           provideCompletionItems: function (model, position) {
             const word = model.getWordUntilPosition(position);
@@ -109,7 +108,7 @@ const CustomCodeEditorBase = ({
               endColumn: word.endColumn,
             };
 
-            const suggestions = getSuggestions(monacoInstance, range);
+            const suggestions = getSuggestions(monaco, range);
 
             return {
               suggestions: suggestions,
@@ -118,7 +117,7 @@ const CustomCodeEditorBase = ({
         });
 
         const themeName = isDark ? 'novu-dark' : 'novu';
-        monacoInstance.editor.defineTheme('novu-dark', {
+        monaco.editor.defineTheme('novu-dark', {
           base: 'vs-dark',
           inherit: true,
           rules: [],
@@ -132,7 +131,7 @@ const CustomCodeEditorBase = ({
           },
         });
 
-        monacoInstance.editor.defineTheme('novu', {
+        monaco.editor.defineTheme('novu', {
           base: 'vs',
           inherit: true,
           rules: [],
@@ -146,11 +145,11 @@ const CustomCodeEditorBase = ({
           },
         });
 
-        monacoInstance.editor.setTheme(themeName);
+        monaco.editor.setTheme(themeName);
 
         decoratorsRef.current = decorators;
         editorRef.current = editor;
-        monacoRef.current = monacoInstance;
+        monacoRef.current = monaco;
         editor.onDidDispose(() => handle?.dispose());
       }}
       options={{
